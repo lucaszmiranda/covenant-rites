@@ -70,8 +70,8 @@ function renderSong(song) {
 /* ---------- Setlist ---------- */
 
 function renderSetlist(currentId) {
-  $("#setlist").innerHTML = setlist.songs.map((s, i) =>
-    `<button data-id="${esc(s.id)}" aria-current="${s.id === currentId}"${s.ready ? "" : " disabled title=\"Mapa ainda não montado\""}><span class="n">${i + 1}</span>${esc(s.title)}</button>`
+  $("#setlist").innerHTML = setlist.songs.map(s =>
+    `<button data-id="${esc(s.id)}" aria-current="${s.id === currentId}"${s.ready ? "" : " disabled title=\"Mapa ainda não montado\""}>${esc(s.title)}</button>`
   ).join("");
 }
 
