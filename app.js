@@ -90,7 +90,6 @@ async function show(id) {
 
 async function init() {
   setlist = await getJSON("data/setlist.json");
-  $("#event").textContent = `Rito ${setlist.event}`;
 
   $("#setlist").addEventListener("click", e => {
     const btn = e.target.closest("button");
