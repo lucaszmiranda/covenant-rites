@@ -2,7 +2,7 @@
   "event": "17.10.26",
   "songs": [
     { "id": "deathcrush", "artist": "Mayhem", "title": "Deathcrush" },
-    { "id": "freezing-moon", "artist": "Mayhem", "title": "Freezing Moon" },
+    { "id": "freezing-moon", "artist": "Mayhem", "title": "Freezing Moon", "ready": true },
     { "id": "circle-of-the-tyrants", "artist": "Celtic Frost", "title": "Circle of the Tyrants", "ready": true },
     { "id": "countess-bathory", "artist": "Venom", "title": "Countess Bathory" },
     { "id": "the-return-of-darkness-and-evil", "artist": "Behemoth", "title": "The Return of Darkness and Evil" }
