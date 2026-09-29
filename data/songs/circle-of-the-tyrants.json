@@ -72,10 +72,10 @@
           "bars": 1,
           "lyrics": [
             [
-              "Circle of the ty-hugh!"
+              "Circle of the ty-ugh!"
             ],
             [
-              "Circle of the ty-hugh!"
+              "Circle of the ty-ugh!"
             ]
           ]
         }
@@ -138,16 +138,6 @@
         {
           "name": "Brues II",
           "bars": 8,
-          "lyrics": [
-            [
-              "New kingdoms rise — By the circle of the tyrants",
-              "In the land of darkness — The warrior that was me"
-            ],
-            [
-              "Where the winds cannot reach — The tyrant's might was born",
-              "Often I look back — With tears in my eyes"
-            ]
-          ],
           "color": "Brues"
         },
         {
@@ -156,10 +146,14 @@
           "bpm": 165,
           "lyrics": [
             [
+              "New kingdoms rise — By the circle of the tyrants",
+              "In the land of darkness — The warrior that was me",
               "Grotesque glory — None will ever see them fall",
               "Hunts and wars — Everlasting shadows"
             ],
             [
+              "Where the winds cannot reach — The tyrant's might was born",
+              "Often I look back — With tears in my eyes",
               "Grotesque glory — None will ever see them fall",
               "Hunts and wars — Everlasting shadows"
             ]
