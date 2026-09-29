@@ -5,13 +5,13 @@
   "colors": {
     "Intro Pt. 1 (Riff 1)": "#56656b",
     "Intro Pt. 2 (Riff 2)": "#1f8a80",
-    "Interlude (Riff 3)": "#a33a4f",
-    "Pre-verse (Riff 4)": "#7a5cc4",
-    "Verse (Riff 4)": "#2f63a8",
+    "Riff Rápido (Riff 3)": "#a33a4f",
+    "Pre-Verse (Riff 4)": "#7a5cc4",
+    "Verse (Riff 5)": "#2f63a8",
     "Interlude (Riff 5)": "#5e8a3a",
     "Bass Break (Riff 6)": "#9a3b78",
-    "Riff 6": "#44389a",
-    "Verse (Riff 3)": "#2a9bb0",
+    "Riff Tremolo (Riff 6)": "#44389a",
+    "Chorus (Riff 6)": "#2a9bb0",
     "Solo": "#3f9a62"
   },
   "structure": [
@@ -25,17 +25,17 @@
       "bars": 16
     },
     {
-      "name": "Interlude (Riff 3)",
+      "name": "Riff Rápido (Riff 3)",
       "bars": 4,
       "bpm": 140
     },
     {
-      "name": "Pre-verse (Riff 4)",
+      "name": "Pre-Verse (Riff 4)",
       "bars": 8,
       "bpm": 145
     },
     {
-      "name": "Verse (Riff 4)",
+      "name": "Verse (Riff 5)",
       "bars": 8
     },
     {
@@ -43,12 +43,12 @@
       "bars": 8
     },
     {
-      "name": "Verse (Riff 4)",
+      "name": "Verse (Riff 5)",
       "bars": 8
     },
     {
       "name": "Pre-Verse II (Riff 4.1)",
-      "color": "Pre-verse (Riff 4)",
+      "color": "Pre-Verse (Riff 4)",
       "bars": 8
     },
     {
@@ -57,11 +57,11 @@
       "bpm": 88
     },
     {
-      "name": "Riff 6",
+      "name": "Riff Tremolo (Riff 6)",
       "bars": 12
     },
     {
-      "name": "Verse (Riff 3)",
+      "name": "Chorus (Riff 6)",
       "bars": 16
     },
     {
@@ -69,12 +69,12 @@
       "bars": 16
     },
     {
-      "name": "Verse (Riff 3)",
+      "name": "Chorus (Riff 6)",
       "bars": 16
     },
     {
-      "name": "Pre-Verse III",
-      "color": "Pre-verse (Riff 4)",
+      "name": "Final / Pre-Verse III (Riff 4.2)",
+      "color": "Pre-Verse (Riff 4)",
       "bars": 17,
       "bpm": 145
     }
