@@ -6,10 +6,22 @@
   "keyNote": "meio tom abaixo da referência",
   "reference": "Versão de estúdio, To Mega Therion (1985)",
   "lineup": [
-    { "name": "Diego", "role": "voz" },
-    { "name": "Lucas", "role": "guitarra" },
-    { "name": "Felipe", "role": "baixo" },
-    { "name": "Pablo", "role": "bateria" }
+    {
+      "name": "Diego",
+      "role": "voz"
+    },
+    {
+      "name": "Lucas",
+      "role": "guitarra"
+    },
+    {
+      "name": "Felipe",
+      "role": "baixo"
+    },
+    {
+      "name": "Pablo",
+      "role": "bateria"
+    }
   ],
   "colors": {
     "Intro": "#b9b4aa",
@@ -21,53 +33,144 @@
     "Olodoom": "#9b6cf0",
     "Thrashy": "#4fb96a",
     "Solo": "#b9b4aa",
-    "Simpliverso": "#4f8ff0"
+    "Simpliverso": "#4f8ff0",
+    "Bridge": "#a3b83a"
   },
   "structure": [
-    { "name": "Intro", "bars": 4, "bpm": 135 },
+    {
+      "name": "Intro",
+      "bars": 4,
+      "bpm": 135
+    },
     {
       "repeat": 2,
       "parts": [
-        { "name": "Main Riff", "bars": 4 },
-        { "name": "Verse", "bars": 12, "lyrics": [
-          ["The battle is over — The sands drunk the blood", "All what there remains — The bitterness delusion"],
-          ["Immortality of the gods — Sits at their side", "As they leave the walls behind — To reach the jewel's gleam"]
-        ] },
-        { "name": "Chorus", "bars": 1, "lyrics": [
-          ["Circle of the ty-hugh!"],
-          ["Circle of the ty-hugh!"]
-        ] }
+        {
+          "name": "Main Riff",
+          "bars": 4
+        },
+        {
+          "name": "Verse",
+          "bars": 8,
+          "lyrics": [
+            [
+              "The battle is over — The sands drunk the blood",
+              "All what there remains — The bitterness delusion"
+            ],
+            [
+              "Immortality of the gods — Sits at their side",
+              "As they leave the walls behind — To reach the jewel's gleam"
+            ]
+          ]
+        },
+        {
+          "name": "Bridge",
+          "bars": 4
+        },
+        {
+          "name": "Chorus",
+          "bars": 1,
+          "lyrics": [
+            [
+              "Circle of the ty-hugh!"
+            ],
+            [
+              "Circle of the ty-hugh!"
+            ]
+          ]
+        }
       ]
     },
-    { "name": "Intro", "detail": "+6ª corda", "color": "Intro", "bars": 4 },
+    {
+      "name": "Intro II",
+      "color": "Intro",
+      "bars": 4
+    },
     {
       "repeat": 2,
       "parts": [
-        { "name": "Brues", "bars": 8, "bpm": 155, "lyrics": [
-          ["Days have come — When the steel will rule", "And upon his head — A crown of gold"],
-          ["I sing the ballads — Victory and defeat", "I hear the tales — Of frozen mystery"]
-        ] },
-        { "name": "Tremelick", "bars": 8, "lyrics": [
-          ["Your hand wields the might — Tyrant's precursor", "You carry the will — As the morning is near"],
-          ["Your hand wields the might — Tyrant's precursor", "You carry the will — As the morning is near"]
-        ] },
-        { "name": "Olodoom", "bars": 8 }
+        {
+          "name": "Brues",
+          "bars": 8,
+          "bpm": 155,
+          "lyrics": [
+            [
+              "Days have come — When the steel will rule",
+              "And upon his head — A crown of gold"
+            ],
+            [
+              "I sing the ballads — Victory and defeat",
+              "I hear the tales — Of frozen mystery"
+            ]
+          ]
+        },
+        {
+          "name": "Tremelick",
+          "bars": 8,
+          "lyrics": [
+            [
+              "Your hand wields the might — Tyrant's precursor",
+              "You carry the will — As the morning is near"
+            ],
+            [
+              "Your hand wields the might — Tyrant's precursor",
+              "You carry the will — As the morning is near"
+            ]
+          ]
+        },
+        {
+          "name": "Olodoom",
+          "bars": 8
+        }
       ]
     },
-    { "name": "Thrashy", "bars": 8 },
-    { "name": "Solo", "bars": 16 },
+    {
+      "name": "Thrashy",
+      "bars": 8
+    },
+    {
+      "name": "Solo",
+      "bars": 16
+    },
     {
       "repeat": 2,
       "parts": [
-        { "name": "Brues", "bars": 8, "lyrics": [
-          ["New kingdoms rise — By the circle of the tyrants", "In the land of darkness — The warrior that was me"],
-          ["Where the winds cannot reach — The tyrant's might was born", "Often I look back — With tears in my eyes"]
-        ] },
-        { "name": "Simpliverso", "bars": 16, "bpm": 165, "lyrics": [
-          ["Grotesque glory — None will ever see them fall", "Hunts and wars — Everlasting shadows"],
-          ["Grotesque glory — None will ever see them fall", "Hunts and wars — Everlasting shadows"]
-        ] },
-        { "name": "Olodoom", "bars": 8, "bpm": 155 }
+        {
+          "name": "Brues II",
+          "bars": 8,
+          "lyrics": [
+            [
+              "New kingdoms rise — By the circle of the tyrants",
+              "In the land of darkness — The warrior that was me"
+            ],
+            [
+              "Where the winds cannot reach — The tyrant's might was born",
+              "Often I look back — With tears in my eyes"
+            ]
+          ],
+          "color": "Brues"
+        },
+        {
+          "name": "Simpliverso",
+          "bars": 16,
+          "bpm": 165,
+          "lyrics": [
+            [
+              "Grotesque glory — None will ever see them fall",
+              "Hunts and wars — Everlasting shadows"
+            ],
+            [
+              "Grotesque glory — None will ever see them fall",
+              "Hunts and wars — Everlasting shadows"
+            ]
+          ]
+        },
+        {
+          "name": "Olodoom II",
+          "bars": 8,
+          "bpm": 155,
+          "color": "Olodoom"
+        }
       ]
     }
   ]
