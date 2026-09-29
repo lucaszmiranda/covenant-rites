@@ -61,9 +61,9 @@ function renderSong(song) {
       <h1>${esc(song.title)}</h1>
       <p class="artist">${esc(song.artist)}</p>
       <dl class="facts">
-        <div><dt>Tom</dt><dd>${esc(song.key)} <small>${esc(song.keyNote || "")}</small></dd></div>
         <div><dt>Formação</dt><dd>${lineup}</dd></div>
         <div><dt>Referência</dt><dd>${esc(song.reference || "")}</dd></div>
+        <div><dt>Tom</dt><dd>${esc(song.key)} <small>${esc(song.keyNote || "")}</small></dd></div>
       </dl>
     </section>
     <section class="structure">${blocks}</section>`;
