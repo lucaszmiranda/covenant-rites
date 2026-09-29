@@ -3,8 +3,8 @@
   "title": "Freezing Moon",
   "artist": "Mayhem",
   "colors": {
-    "Riff 1": "#56656b",
-    "Riff 2": "#1f8a80",
+    "Intro Pt. 1 (Riff 1)": "#56656b",
+    "Intro Pt. 2 (Riff 2)": "#1f8a80",
     "Interlude (Riff 3)": "#a33a4f",
     "Pre-verse (Riff 4)": "#7a5cc4",
     "Verse (Riff 4)": "#2f63a8",
@@ -16,12 +16,12 @@
   },
   "structure": [
     {
-      "name": "Riff 1",
+      "name": "Intro Pt. 1 (Riff 1)",
       "bars": 24,
       "bpm": 100
     },
     {
-      "name": "Riff 2",
+      "name": "Intro Pt. 2 (Riff 2)",
       "bars": 16
     },
     {
@@ -47,7 +47,7 @@
       "bars": 8
     },
     {
-      "name": "Pre-Verse II",
+      "name": "Pre-Verse II (Riff 4.1)",
       "color": "Pre-verse (Riff 4)",
       "bars": 8
     },
