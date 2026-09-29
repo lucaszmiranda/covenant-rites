@@ -1,23 +1,18 @@
-# Covenant Rites · Charts
+# Covenant Rites · Setlist
 
-Página estática com o material de estudo do setlist: mapa da estrutura, tab por instrumento e letra, tudo alinhado por seção.
+Página única com o mapa de cada música do setlist: as partes em ordem, quantos compassos cada uma tem, o que repete e a letra no lugar certo. Feita pra fazer sentido pra todo mundo da formação, cantando ou tocando.
 
-## Como está organizado
+## Arquivos
 
 - `index.html`, `style.css`, `app.js`: a página. Sem build, sem dependência.
-- `data/setlist.json`: evento e lista de músicas (o seletor do topo lê daqui).
-- `data/songs/<id>.json`: o que é escrito à mão por música: tom, referência, formação, nome dos instrumentos, cores das seções, colchetes de repetição do mapa, letra por seção e observações.
-- `data/scores/<id>.json`: gerado a partir do Guitar Pro. Não editar à mão.
-- `gp/`: arquivos Guitar Pro originais.
-- `tools/gp2json.py`: extrator do `.gp` (Guitar Pro 7/8) pro JSON de `data/scores/`.
+- `data/setlist.json`: evento e ordem das músicas (vira os botões do topo).
+- `data/songs/<id>.json`: uma música: tom, formação, cores e estrutura.
+- `gp/`: arquivos Guitar Pro de referência, usados pra levantar a estrutura.
 
-## Adicionar uma música
+## Estrutura de uma música
 
-1. Colocar o `.gp` em `gp/<id>.gp`.
-2. `python tools/gp2json.py gp/<id>.gp data/scores/<id>.json`
-3. Criar `data/songs/<id>.json` seguindo o de Circle of the Tyrants. A letra é indexada pelo número da seção (o `#` que aparece no mapa).
-4. Adicionar a música em `data/setlist.json`.
+`structure` é a lista de partes em ordem. Cada parte tem `name`, `bars` (compassos) e, se precisar, `bpm` (quando o andamento muda ali), `detail` e `lyrics`. Um bloco que repete é `{ "repeat": 2, "parts": [...] }`, e aí a letra de cada parte vem uma por passada. Circle of the Tyrants serve de modelo.
 
 ## Rodar local
 
-A página carrega os JSON via `fetch`, então precisa de servidor (abrir o arquivo direto do disco não funciona): `python -m http.server 8765` na raiz e abrir `http://localhost:8765`.
+A página carrega os JSON via `fetch`, então precisa de servidor: `python -m http.server 8765` na raiz e abrir `http://localhost:8765`.

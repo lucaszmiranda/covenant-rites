@@ -3,38 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Covenant Rites · Charts</title>
+  <title>Covenant Rites · Setlist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Inter:wght@400;500;700;800&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
   <header class="topbar">
     <span class="brand">Covenant Rites</span>
     <span class="event" id="event"></span>
-    <select id="song-select" aria-label="Música"></select>
   </header>
 
-  <div class="strip" id="strip" aria-label="Estrutura da música"></div>
+  <nav class="setlist" id="setlist" aria-label="Setlist"></nav>
 
-  <div class="layout">
-    <aside class="map-wrap">
-      <h2 class="eyebrow">Mapa</h2>
-      <nav class="map" id="map"></nav>
-    </aside>
+  <main id="song"></main>
 
-    <main>
-      <section class="song-head" id="song-head"></section>
-
-      <div class="controls">
-        <div class="seg" id="track-select" role="tablist" aria-label="Instrumento"></div>
-      </div>
-
-      <div id="sections"></div>
-    </main>
-  </div>
-
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>
