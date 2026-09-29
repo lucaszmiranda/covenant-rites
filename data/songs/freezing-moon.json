@@ -36,7 +36,10 @@
     },
     {
       "name": "Verse (Riff 5)",
-      "bars": 8
+      "bars": 8,
+      "lyrics": [
+        "Everything here is so cold\nEverything here is so dark\nI remember it as from a dream\nIn the corner of this time"
+      ]
     },
     {
       "name": "Interlude (Riff 6)",
@@ -44,7 +47,10 @@
     },
     {
       "name": "Verse (Riff 5)",
-      "bars": 8
+      "bars": 8,
+      "lyrics": [
+        "Diabolic shapes float by\nOut from the dark\nI remember it was here I died\nBy following the freezing moon"
+      ]
     },
     {
       "name": "Pre-Verse II (Riff 4.1)",
@@ -62,7 +68,10 @@
     },
     {
       "name": "Chorus (Riff 7)",
-      "bars": 16
+      "bars": 16,
+      "lyrics": [
+        "It's night again\nNight, you beautiful\nI please my hunger\nOn living humans\nNight of hunger\nFollow its call\nFollow the freezing moon"
+      ]
     },
     {
       "name": "Solo",
@@ -70,7 +79,10 @@
     },
     {
       "name": "Chorus (Riff 7)",
-      "bars": 16
+      "bars": 16,
+      "lyrics": [
+        "Darkness is growing\nEternity opens\nThe cemetery lights up again\nAs in ancient times\nFallen souls die behind my steps\nBy following the freezing moon"
+      ]
     },
     {
       "name": "Final (Riff 4.2 + Riff 6)",

@@ -18,8 +18,8 @@ async function getSong(id) {
 
 /* ---------- Letra ---------- */
 
-// Cada linha "A — B" vira um par: A e B em linhas separadas, com respiro entre os pares.
-const line = l => `<p>${l.split(" — ").map(esc).join("<br>")}</p>`;
+// Cada item é uma estrofe: " — " ou quebra de linha viram linhas separadas, com respiro entre estrofes.
+const line = l => `<p>${l.split(/ — |\n/).map(esc).join("<br>")}</p>`;
 
 const lyricsHTML = lines => (lines && lines.length ? `<div class="lyrics">${lines.map(line).join("")}</div>` : "");
 
