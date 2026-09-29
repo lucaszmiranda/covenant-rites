@@ -24,17 +24,17 @@
     }
   ],
   "colors": {
-    "Intro": "#b9b4aa",
-    "Main Riff": "#2fb5a8",
-    "Verse": "#ff8a4c",
-    "Chorus": "#d65fbf",
-    "Brues": "#ffc043",
-    "Tremelick": "#e8506e",
-    "Olodoom": "#9b6cf0",
-    "Thrashy": "#4fb96a",
-    "Solo": "#b9b4aa",
-    "Simpliverso": "#4f8ff0",
-    "Bridge": "#a3b83a"
+    "Intro": "#56656b",
+    "Main Riff": "#1f8a80",
+    "Verse": "#2f63a8",
+    "Bridge": "#5e8a3a",
+    "Chorus": "#9a3b78",
+    "Brues": "#7a5cc4",
+    "Tremelick": "#a33a4f",
+    "Olodoom": "#44389a",
+    "Thrashy": "#3f9a62",
+    "Solo": "#56656b",
+    "Simpliverso": "#2a9bb0"
   },
   "structure": [
     {

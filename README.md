@@ -5,13 +5,15 @@ Página única com o mapa de cada música do setlist: as partes em ordem, quanto
 ## Arquivos
 
 - `index.html`, `style.css`, `app.js`: a página. Sem build, sem dependência.
-- `data/setlist.json`: evento e ordem das músicas (vira os botões do topo).
+- `data/setlist.json`: evento e ordem das músicas (vira os botões do topo). Só fica clicável a música com `"ready": true`.
 - `data/songs/<id>.json`: uma música: tom, formação, cores e estrutura.
 - `gp/`: arquivos Guitar Pro de referência, usados pra levantar a estrutura.
 
 ## Estrutura de uma música
 
-`structure` é a lista de partes em ordem. Cada parte tem `name`, `bars` (compassos) e, se precisar, `bpm` (quando o andamento muda ali), `detail` e `lyrics`. Um bloco que repete é `{ "repeat": 2, "parts": [...] }`, e aí a letra de cada parte vem uma por passada. Circle of the Tyrants serve de modelo.
+`structure` é a lista de partes em ordem. Cada parte tem `name`, `bars` (compassos) e, se precisar, `bpm`, `color` (nome de outra parte pra herdar a cor) e `lyrics`. Um bloco que repete é `{ "repeat": 2, "parts": [...] }`, e aí a letra de cada parte vem uma por passada.
+
+A página sempre desenha a música como lista reta, na ordem em que ela acontece: um bloco que repete aparece inteiro a cada passada, sem colchete nem "×2". O selo de bpm só aparece onde o andamento muda em relação ao que vinha tocando. Circle of the Tyrants serve de modelo.
 
 ## Rodar local
 

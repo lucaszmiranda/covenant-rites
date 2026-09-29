@@ -6,7 +6,7 @@ const cache = {};
 let setlist;
 
 async function getJSON(path) {
-  const res = await fetch(path);
+  const res = await fetch(path, { cache: "no-cache" });
   if (!res.ok) throw new Error(`Falha ao carregar ${path}`);
   return res.json();
 }
@@ -20,41 +20,38 @@ async function getSong(id) {
 
 const line = l => `<p>${esc(l).replace(" — ", ' <span class="dash">—</span> ')}</p>`;
 
-// Numa parte que repete, a letra vem uma por passada. Se for igual em todas, mostra uma vez só.
-function lyricsHTML(lyrics, inRepeat) {
-  if (!lyrics || !lyrics.length) return "";
-  const passes = inRepeat ? lyrics : [lyrics];
-  const allSame = passes.every(p => JSON.stringify(p) === JSON.stringify(passes[0]));
-  const shown = allSame ? [passes[0]] : passes;
-  return `<div class="lyrics">${shown.map((p, i) => `
-    <div class="pass">
-      ${shown.length > 1 ? `<span class="pass-n">${i + 1}ª</span>` : ""}
-      <div>${p.map(line).join("")}</div>
-    </div>`).join("")}</div>`;
-}
+const lyricsHTML = lines => (lines && lines.length ? `<div class="lyrics">${lines.map(line).join("")}</div>` : "");
 
 /* ---------- Estrutura ---------- */
 
-function partHTML(song, part, inRepeat) {
+// Tudo aparece na ordem em que a música acontece.
+// O selo de bpm só aparece onde o andamento muda de fato em relação ao que vinha tocando.
+function partHTML(song, part, pass, flow) {
   const color = song.colors[part.color || part.name] || "#999";
+  const lyrics = pass == null ? part.lyrics : (part.lyrics || [])[pass];
+  const changes = part.bpm && part.bpm !== flow.bpm;
+  if (part.bpm) flow.bpm = part.bpm;
   return `<div class="part" style="--c:${color}">
     <div class="part-top">
       <span class="part-name">${esc(part.name)}${part.detail ? ` <small>${esc(part.detail)}</small>` : ""}</span>
-      ${part.bpm ? `<span class="bpm">${part.bpm} bpm</span>` : ""}
+      ${changes ? `<span class="bpm">${part.bpm} bpm</span>` : ""}
       <span class="bars"><b>${part.bars}</b>${part.bars === 1 ? "compasso" : "compassos"}</span>
     </div>
-    ${lyricsHTML(part.lyrics, inRepeat)}
+    ${lyricsHTML(lyrics)}
   </div>`;
+}
+
+// Bloco que repete vira uma lista reta: cada passada desenhada inteira, em sequência.
+function repeatHTML(song, block, flow) {
+  return Array.from({ length: block.repeat }, (_, k) =>
+    block.parts.map(p => partHTML(song, p, k, flow)).join("")).join("");
 }
 
 function renderSong(song) {
   const lineup = song.lineup.map(p => `${esc(p.name)} <small>(${esc(p.role)})</small>`).join(" · ");
-  const blocks = song.structure.map(block => block.repeat
-    ? `<div class="repeat"><span class="repeat-badge">Repete ${block.repeat}×</span>
-         ${block.parts.map(p => partHTML(song, p, true)).join("")}
-       </div>`
-    : partHTML(song, block, false)
-  ).join("");
+  const flow = { bpm: null };
+  const blocks = song.structure.map(block =>
+    (block.repeat ? repeatHTML(song, block, flow) : partHTML(song, block, null, flow))).join("");
 
   $("#song").innerHTML = `
     <section class="head">
@@ -74,7 +71,7 @@ function renderSong(song) {
 
 function renderSetlist(currentId) {
   $("#setlist").innerHTML = setlist.songs.map((s, i) =>
-    `<button data-id="${esc(s.id)}" aria-current="${s.id === currentId}"><span class="n">${i + 1}</span>${esc(s.title)}</button>`
+    `<button data-id="${esc(s.id)}" aria-current="${s.id === currentId}"${s.ready ? "" : " disabled title=\"Mapa ainda não montado\""}><span class="n">${i + 1}</span>${esc(s.title)}</button>`
   ).join("");
 }
 
@@ -99,7 +96,8 @@ async function init() {
   });
 
   const wanted = new URLSearchParams(location.search).get("song");
-  const first = setlist.songs.some(s => s.id === wanted) ? wanted : setlist.songs[0].id;
+  const ready = setlist.songs.filter(s => s.ready);
+  const first = ready.some(s => s.id === wanted) ? wanted : ready[0].id;
   show(first);
 }
 
