@@ -5,7 +5,7 @@
   "colors": {
     "Intro Pt. 1 (Riff 1)": "#56656b",
     "Intro Pt. 2 (Riff 2)": "#1f8a80",
-    "Riff Rápido (Riff 3)": "#a33a4f",
+    "Intro Pt. 3 (Riff 3)": "#a33a4f",
     "Pre-Verse (Riff 4)": "#7a5cc4",
     "Verse (Riff 5)": "#2f63a8",
     "Interlude (Riff 5)": "#5e8a3a",
@@ -25,7 +25,7 @@
       "bars": 16
     },
     {
-      "name": "Riff Rápido (Riff 3)",
+      "name": "Intro Pt. 3 (Riff 3)",
       "bars": 4,
       "bpm": 140
     },
