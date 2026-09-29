@@ -5,12 +5,12 @@
   "colors": {
     "Riff 1": "#56656b",
     "Riff 2": "#1f8a80",
-    "Riff Rápido": "#a33a4f",
-    "Pre-Verse": "#7a5cc4",
-    "Verse": "#2f63a8",
-    "Interlude": "#5e8a3a",
+    "Interlude (Riff 3)": "#a33a4f",
+    "Pre-verse (Riff 4)": "#7a5cc4",
+    "Verse (Riff 4)": "#2f63a8",
+    "Interlude (Riff 5)": "#5e8a3a",
     "Bass Break": "#9a3b78",
-    "Riff 3": "#44389a",
+    "Chorus (Riff 6)": "#44389a",
     "Verse (Riff 3)": "#2a9bb0",
     "Solo": "#3f9a62"
   },
@@ -25,30 +25,30 @@
       "bars": 16
     },
     {
-      "name": "Riff Rápido",
+      "name": "Interlude (Riff 3)",
       "bars": 4,
       "bpm": 140
     },
     {
-      "name": "Pre-Verse",
+      "name": "Pre-verse (Riff 4)",
       "bars": 8,
       "bpm": 145
     },
     {
-      "name": "Verse",
+      "name": "Verse (Riff 4)",
       "bars": 8
     },
     {
-      "name": "Interlude",
+      "name": "Interlude (Riff 5)",
       "bars": 8
     },
     {
-      "name": "Verse",
+      "name": "Verse (Riff 4)",
       "bars": 8
     },
     {
       "name": "Pre-Verse II",
-      "color": "Pre-Verse",
+      "color": "Pre-verse (Riff 4)",
       "bars": 8
     },
     {
@@ -57,7 +57,7 @@
       "bpm": 88
     },
     {
-      "name": "Riff 3",
+      "name": "Chorus (Riff 6)",
       "bars": 12
     },
     {
@@ -74,7 +74,7 @@
     },
     {
       "name": "Pre-Verse III",
-      "color": "Pre-Verse",
+      "color": "Pre-verse (Riff 4)",
       "bars": 17,
       "bpm": 145
     }
