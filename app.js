@@ -18,7 +18,8 @@ async function getSong(id) {
 
 /* ---------- Letra ---------- */
 
-const line = l => `<p>${esc(l).replace(" — ", ' <span class="dash">—</span> ')}</p>`;
+// Cada linha "A — B" vira um par: A e B em linhas separadas, com respiro entre os pares.
+const line = l => `<p>${l.split(" — ").map(esc).join("<br>")}</p>`;
 
 const lyricsHTML = lines => (lines && lines.length ? `<div class="lyrics">${lines.map(line).join("")}</div>` : "");
 

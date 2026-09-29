@@ -104,9 +104,8 @@ main { max-width: 720px; margin: 0 auto; padding: 0 16px 64px; }
 .bars { margin-left: auto; white-space: nowrap; color: var(--muted); font-size: 14px; }
 .bars b { color: var(--ink); font-size: 19px; font-weight: 800; margin-right: 3px; }
 
-.lyrics { margin-top: 6px; }
-.lyrics p { margin: 0; line-height: 1.45; }
-.lyrics .dash { color: var(--muted); }
+.lyrics { margin-top: 8px; display: grid; gap: 14px; }
+.lyrics p { margin: 0; font-size: 21px; font-weight: 500; line-height: 1.35; }
 
 
 .error { color: var(--muted); padding: 32px 0; }
