@@ -8,10 +8,10 @@
     "Intro Pt. 3 (Riff 3)": "#a33a4f",
     "Pre-Verse (Riff 4)": "#7a5cc4",
     "Verse (Riff 5)": "#2f63a8",
-    "Interlude (Riff 5)": "#5e8a3a",
-    "Bass Break (Riff 6)": "#9a3b78",
-    "Riff Tremolo (Riff 6)": "#44389a",
-    "Chorus (Riff 6)": "#2a9bb0",
+    "Interlude (Riff 6)": "#5e8a3a",
+    "Bass Break (Riff 7)": "#9a3b78",
+    "Riff Tremolo (Riff 7)": "#44389a",
+    "Chorus (Riff 7)": "#2a9bb0",
     "Solo": "#3f9a62"
   },
   "structure": [
@@ -39,7 +39,7 @@
       "bars": 8
     },
     {
-      "name": "Interlude (Riff 5)",
+      "name": "Interlude (Riff 6)",
       "bars": 8
     },
     {
@@ -52,16 +52,16 @@
       "bars": 8
     },
     {
-      "name": "Bass Break (Riff 6)",
+      "name": "Bass Break (Riff 7)",
       "bars": 8,
       "bpm": 88
     },
     {
-      "name": "Riff Tremolo (Riff 6)",
+      "name": "Riff Tremolo (Riff 7)",
       "bars": 12
     },
     {
-      "name": "Chorus (Riff 6)",
+      "name": "Chorus (Riff 7)",
       "bars": 16
     },
     {
@@ -69,7 +69,7 @@
       "bars": 16
     },
     {
-      "name": "Chorus (Riff 6)",
+      "name": "Chorus (Riff 7)",
       "bars": 16
     },
     {
