@@ -77,7 +77,8 @@ async function show(id) {
   } catch (err) {
     $("#song").innerHTML = `<p class="error">Não deu pra carregar essa música (${esc(err.message)}).</p>`;
   }
-  history.replaceState(null, "", `?song=${encodeURIComponent(id)}`);
+  // A música escolhida vai no # do link (é o único pedaço de URL que sobrevive dentro de um artifact)
+  try { history.replaceState(null, "", `#${id}`); } catch (e) { /* sem histórico, segue */ }
 }
 
 async function init() {
@@ -90,7 +91,7 @@ async function init() {
     scrollTo({ top: 0 });
   });
 
-  const wanted = new URLSearchParams(location.search).get("song");
+  const wanted = location.hash.slice(1) || new URLSearchParams(location.search).get("song");
   const ready = setlist.songs.filter(s => s.ready);
   const first = ready.some(s => s.id === wanted) ? wanted : ready[0].id;
   show(first);

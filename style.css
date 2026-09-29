@@ -43,7 +43,7 @@ body {
 /* Escolha da música */
 .setlist {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 5;
   display: flex;
   gap: 6px;
