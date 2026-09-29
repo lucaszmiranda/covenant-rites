@@ -48,7 +48,6 @@ function repeatHTML(song, block, flow) {
 }
 
 function renderSong(song) {
-  const lineup = song.lineup.map(p => `${esc(p.name)} <small>(${esc(p.role)})</small>`).join(" · ");
   const flow = { bpm: null };
   const blocks = song.structure.map(block =>
     (block.repeat ? repeatHTML(song, block, flow) : partHTML(song, block, null, flow))).join("");
@@ -57,11 +56,6 @@ function renderSong(song) {
     <section class="head">
       <h1>${esc(song.title)}</h1>
       <p class="artist">${esc(song.artist)}</p>
-      <dl class="facts">
-        <div><dt>Formação</dt><dd>${lineup}</dd></div>
-        <div><dt>Referência</dt><dd>${esc(song.reference || "")}</dd></div>
-        <div><dt>Tom</dt><dd>${esc(song.key)} <small>${esc(song.keyNote || "")}</small></dd></div>
-      </dl>
     </section>
     <section class="structure">${blocks}</section>`;
   document.title = `${song.title} · Covenant Rites`;

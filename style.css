@@ -80,11 +80,6 @@ main { max-width: 720px; margin: 0 auto; padding: 0 16px 64px; }
 .head { padding: 26px 0 18px; }
 .head h1 { margin: 0; font-size: clamp(30px, 7vw, 44px); line-height: 1.05; font-weight: 800; letter-spacing: -.02em; }
 .head .artist { margin: 4px 0 16px; font-size: 18px; color: var(--muted); font-weight: 500; }
-.facts { margin: 0; display: grid; gap: 6px; }
-.facts div { display: flex; gap: 10px; }
-.facts dt { width: 84px; flex: none; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
-.facts dd { margin: 0; font-weight: 500; }
-.facts dd small { color: var(--muted); }
 
 /* Estrutura */
 .structure { display: flex; flex-direction: column; gap: 6px; }

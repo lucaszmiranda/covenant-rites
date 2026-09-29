@@ -2,27 +2,6 @@
   "id": "circle-of-the-tyrants",
   "title": "Circle of the Tyrants",
   "artist": "Celtic Frost",
-  "key": "Eb",
-  "keyNote": "meio tom abaixo da referência",
-  "reference": "Versão de estúdio, To Mega Therion (1985)",
-  "lineup": [
-    {
-      "name": "Diego",
-      "role": "voz"
-    },
-    {
-      "name": "Lucas",
-      "role": "guitarra"
-    },
-    {
-      "name": "Felipe",
-      "role": "baixo"
-    },
-    {
-      "name": "Pablo",
-      "role": "bateria"
-    }
-  ],
   "colors": {
     "Intro": "#56656b",
     "Main Riff": "#1f8a80",

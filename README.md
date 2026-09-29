@@ -6,7 +6,7 @@ Página única com o mapa de cada música do setlist: as partes em ordem, quanto
 
 - `index.html`, `style.css`, `app.js`: a página. Sem build, sem dependência.
 - `data/setlist.json`: evento e ordem das músicas (vira os botões do topo). Só fica clicável a música com `"ready": true`.
-- `data/songs/<id>.json`: uma música: tom, formação, cores e estrutura.
+- `data/songs/<id>.json`: uma música: título, banda, cores e estrutura.
 - `gp/`: arquivos Guitar Pro de referência, usados pra levantar a estrutura.
 
 ## Estrutura de uma música
