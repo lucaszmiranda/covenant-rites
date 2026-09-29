@@ -10,7 +10,7 @@
     "Verse (Riff 5)": "#2f63a8",
     "Interlude (Riff 6)": "#5e8a3a",
     "Bass Break (Riff 7)": "#9a3b78",
-    "Riff Tremolo (Riff 7)": "#44389a",
+    "Pre-Chorus (Riff 7)": "#44389a",
     "Chorus (Riff 7)": "#2a9bb0",
     "Solo": "#3f9a62"
   },
@@ -57,7 +57,7 @@
       "bpm": 88
     },
     {
-      "name": "Riff Tremolo (Riff 7)",
+      "name": "Pre-Chorus (Riff 7)",
       "bars": 12
     },
     {
