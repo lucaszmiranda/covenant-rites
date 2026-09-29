@@ -9,8 +9,8 @@
     "Pre-verse (Riff 4)": "#7a5cc4",
     "Verse (Riff 4)": "#2f63a8",
     "Interlude (Riff 5)": "#5e8a3a",
-    "Bass Break (Riff 5)": "#9a3b78",
-    "Riff 5": "#44389a",
+    "Bass Break (Riff 6)": "#9a3b78",
+    "Riff 6": "#44389a",
     "Verse (Riff 3)": "#2a9bb0",
     "Solo": "#3f9a62"
   },
@@ -52,12 +52,12 @@
       "bars": 8
     },
     {
-      "name": "Bass Break (Riff 5)",
+      "name": "Bass Break (Riff 6)",
       "bars": 8,
       "bpm": 88
     },
     {
-      "name": "Riff 5",
+      "name": "Riff 6",
       "bars": 12
     },
     {
