@@ -15,19 +15,68 @@
     "Solo": "#3f9a62"
   },
   "structure": [
-    { "name": "Riff 1", "bars": 24, "bpm": 100 },
-    { "name": "Riff 2", "bars": 16 },
-    { "name": "Riff Rápido", "bars": 4, "bpm": 140 },
-    { "name": "Pre-Verse", "bars": 8, "bpm": 145 },
-    { "name": "Verse", "bars": 8 },
-    { "name": "Interlude", "bars": 8 },
-    { "name": "Verse", "bars": 8 },
-    { "name": "Pre-Verse II", "color": "Pre-Verse", "bars": 8 },
-    { "name": "Bass Break", "bars": 8, "bpm": 88 },
-    { "name": "Riff 3", "bars": 12 },
-    { "name": "Verse (Riff 3)", "bars": 14 },
-    { "name": "Solo", "bars": 18 },
-    { "name": "Verse (Riff 3)", "bars": 16 },
-    { "name": "Pre-Verse III", "color": "Pre-Verse", "bars": 17, "bpm": 145 }
+    {
+      "name": "Riff 1",
+      "bars": 24,
+      "bpm": 100
+    },
+    {
+      "name": "Riff 2",
+      "bars": 16
+    },
+    {
+      "name": "Riff Rápido",
+      "bars": 4,
+      "bpm": 140
+    },
+    {
+      "name": "Pre-Verse",
+      "bars": 8,
+      "bpm": 145
+    },
+    {
+      "name": "Verse",
+      "bars": 8
+    },
+    {
+      "name": "Interlude",
+      "bars": 8
+    },
+    {
+      "name": "Verse",
+      "bars": 8
+    },
+    {
+      "name": "Pre-Verse II",
+      "color": "Pre-Verse",
+      "bars": 8
+    },
+    {
+      "name": "Bass Break",
+      "bars": 8,
+      "bpm": 88
+    },
+    {
+      "name": "Riff 3",
+      "bars": 12
+    },
+    {
+      "name": "Verse (Riff 3)",
+      "bars": 16
+    },
+    {
+      "name": "Solo",
+      "bars": 16
+    },
+    {
+      "name": "Verse (Riff 3)",
+      "bars": 16
+    },
+    {
+      "name": "Pre-Verse III",
+      "color": "Pre-Verse",
+      "bars": 17,
+      "bpm": 145
+    }
   ]
 }
