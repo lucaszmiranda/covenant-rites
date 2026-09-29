@@ -28,7 +28,7 @@ body {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  max-width: 720px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 18px 16px 6px;
 }
@@ -48,7 +48,7 @@ body {
   z-index: 5;
   display: flex;
   gap: 6px;
-  max-width: 720px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 10px 16px;
   overflow-x: auto;
@@ -74,7 +74,7 @@ body {
 .setlist button:disabled { opacity: .4; cursor: default; }
 .setlist button[aria-current="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
-main { max-width: 720px; margin: 0 auto; padding: 0 16px 64px; }
+main { max-width: 1440px; margin: 0 auto; padding: 0 16px 64px; }
 
 /* Cabeçalho da música */
 .head { padding: 26px 0 18px; }
