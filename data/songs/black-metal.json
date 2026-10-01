@@ -1,0 +1,89 @@
+{
+  "id": "black-metal",
+  "title": "Black Metal",
+  "artist": "Venom",
+  "colors": {
+    "Main Riff": "#1f8a80",
+    "Verse 1/2": "#2f63a8",
+    "Verse 2/2": "#2a9bb0",
+    "Chorus": "#9a3b78",
+    "Bridge": "#5e8a3a",
+    "Bridge (Long)": "#5e8a3a",
+    "Verse 3/X": "#44389a",
+    "Interlude (\"Solo\")": "#a33a4f",
+    "Bridge/Ending": "#56656b"
+  },
+  "structure": [
+    {
+      "name": "Main Riff",
+      "bars": 8,
+      "bpm": 163
+    },
+    {
+      "name": "Verse 1/2",
+      "bars": 8
+    },
+    {
+      "name": "Verse 2/2",
+      "bars": 8
+    },
+    {
+      "name": "Chorus",
+      "bars": 10
+    },
+    {
+      "name": "Bridge",
+      "bars": 2
+    },
+    {
+      "name": "Main Riff",
+      "bars": 8
+    },
+    {
+      "name": "Verse 1/2",
+      "bars": 8
+    },
+    {
+      "name": "Verse 2/2",
+      "bars": 8
+    },
+    {
+      "name": "Chorus",
+      "bars": 10
+    },
+    {
+      "name": "Bridge (Long)",
+      "bars": 8
+    },
+    {
+      "name": "Verse 3/X",
+      "bars": 10,
+      "bpm": 160
+    },
+    {
+      "name": "Interlude (\"Solo\")",
+      "bars": 12
+    },
+    {
+      "name": "Main Riff",
+      "bars": 8,
+      "bpm": 163
+    },
+    {
+      "name": "Verse 1/2",
+      "bars": 8
+    },
+    {
+      "name": "Verse 2/2",
+      "bars": 8
+    },
+    {
+      "name": "Chorus",
+      "bars": 10
+    },
+    {
+      "name": "Bridge/Ending",
+      "bars": 6
+    }
+  ]
+}
