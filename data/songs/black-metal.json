@@ -87,7 +87,6 @@
     {
       "name": "Verse 3/X",
       "bars": 10,
-      "bpm": 160,
       "lyrics": [
         "Come ride the night with us, rock hard and fight\nUnited my legions, we stand",
         "Freak hard and wild for us, give up your souls\nLive for the quest Satan's band"
@@ -99,8 +98,7 @@
     },
     {
       "name": "Main Riff",
-      "bars": 8,
-      "bpm": 163
+      "bars": 8
     },
     {
       "name": "Verse 1/2",
