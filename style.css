@@ -31,13 +31,12 @@ body {
   margin: 0 auto;
   padding: 36px 16px 32px;
 }
-.brand {
-  font-family: "UnifrakturMaguntia", serif;
-  font-size: clamp(44px, 11vw, 72px);
-  line-height: 1;
-  color: var(--accent);
-  text-shadow: 0 0 28px color-mix(in srgb, var(--accent) 45%, transparent);
-  white-space: nowrap;
+.brand { margin: 0; line-height: 0; }
+.brand img {
+  display: block;
+  width: min(480px, calc(100vw - 32px));
+  height: auto;
+  filter: drop-shadow(0 0 22px color-mix(in srgb, var(--accent) 30%, transparent));
 }
 
 /* Escolha da música */
