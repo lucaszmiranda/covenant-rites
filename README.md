@@ -13,7 +13,7 @@ Página única com o mapa de cada música do setlist: as partes em ordem, quanto
 
 `structure` é a lista de partes em ordem. Cada parte tem `name`, `bars` (compassos) e, se precisar, `bpm`, `color` (nome de outra parte pra herdar a cor) e `lyrics`. Um bloco que repete é `{ "repeat": 2, "parts": [...] }`, e aí a letra de cada parte vem uma por passada.
 
-Na letra, `[Nome] ` no começo de uma linha diz quem canta dali em diante (ex.: `"[Lucas] Black metal"`, ou `[Felipe/Lucas]` pros dois). O nome aparece numa coluna à esquerda, na cor definida em `singers` no `data/setlist.json`. `*trecho*` sai destacado. Black Metal serve de modelo.
+Na letra, `[Nome] ` no começo de uma linha diz quem canta dali em diante (ex.: `"[Lucas] Black metal"`, ou `[Felipe/Lucas]` pros dois). O nome aparece numa coluna à esquerda, na cor definida em `singers` no `data/setlist.json`. `*[Nome] trecho*` é backing: o trecho sai na cor de quem entra junto, com um "+NOME" do lado (sem nome, `*trecho*` é só destaque). Black Metal serve de modelo.
 
 A página sempre desenha a música como lista reta, na ordem em que ela acontece: um bloco que repete aparece inteiro a cada passada, sem colchete nem "×2". O selo de bpm só aparece onde o andamento muda em relação ao que vinha tocando. Circle of the Tyrants serve de modelo.
 
