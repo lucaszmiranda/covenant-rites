@@ -19,22 +19,16 @@ async function getSong(id) {
 /* ---------- Letra ---------- */
 
 // Cada item é uma estrofe: " — " ou quebra de linha viram linhas separadas, com respiro entre estrofes.
-// "[Nome] " no começo da linha diz quem canta dali em diante.
-// "*trecho*" vira destaque; "*[Nome] trecho*" é backing: o trecho sai na cor de quem entra junto.
+// "[Nome] " no começo da linha diz quem canta dali em diante; "*trecho*" (backing) sai sublinhado.
 const SINGER = /^\[([^\]]+)\]\s*/;
 const splitLines = s => s.split(/ — |\n/);
-const whoColor = name => {
-  const color = (setlist.singers || {})[name];
-  return color ? ` style="--who:${color}"` : "";
-};
-const text = l => esc(l).replace(/\*(?:\[([^\]]+)\]\s*)?([^*]+)\*/g, (_, back, t) => back
-  ? `<em class="back"${whoColor(back)}>${t}<small>+${back}</small></em>`
-  : `<em>${t}</em>`);
+const text = l => esc(l).replace(/\*([^*]+)\*/g, "<em>$1</em>");
 
 function singerHTML(l) {
   const m = l.match(SINGER);
   if (!m) return `<span class="who"></span>`;
-  return `<span class="who"${whoColor(m[1])}>${m[1].split("/").map(esc).join("/<wbr>")}</span>`;
+  const color = (setlist.singers || {})[m[1]];
+  return `<span class="who"${color ? ` style="--who:${color}"` : ""}>${m[1].split("/").map(esc).join("/<wbr>")}</span>`;
 }
 
 // Com cantor marcado, cada linha ganha a coluna do nome à esquerda (vazia quando segue o mesmo cantor).
