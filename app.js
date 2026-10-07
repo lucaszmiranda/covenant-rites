@@ -19,9 +19,29 @@ async function getSong(id) {
 /* ---------- Letra ---------- */
 
 // Cada item é uma estrofe: " — " ou quebra de linha viram linhas separadas, com respiro entre estrofes.
-const line = l => `<p>${l.split(/ — |\n/).map(esc).join("<br>")}</p>`;
+// "[Nome] " no começo da linha diz quem canta dali em diante; "*trecho*" vira destaque.
+const SINGER = /^\[([^\]]+)\]\s*/;
+const splitLines = s => s.split(/ — |\n/);
+const text = l => esc(l).replace(/\*([^*]+)\*/g, "<em>$1</em>");
 
-const lyricsHTML = lines => (lines && lines.length ? `<div class="lyrics">${lines.map(line).join("")}</div>` : "");
+function singerHTML(l) {
+  const m = l.match(SINGER);
+  if (!m) return `<span class="who"></span>`;
+  const color = (setlist.singers || {})[m[1]];
+  return `<span class="who"${color ? ` style="--who:${color}"` : ""}>${m[1].split("/").map(esc).join("/<wbr>")}</span>`;
+}
+
+// Com cantor marcado, cada linha ganha a coluna do nome à esquerda (vazia quando segue o mesmo cantor).
+const stanza = (s, sung) => sung
+  ? `<p class="sung">${splitLines(s).map(l => `${singerHTML(l)}<span>${text(l.replace(SINGER, ""))}</span>`).join("")}</p>`
+  : `<p>${splitLines(s).map(text).join("<br>")}</p>`;
+
+const lyricsHTML = (lines, sung) => (lines && lines.length ? `<div class="lyrics">${lines.map(s => stanza(s, sung)).join("")}</div>` : "");
+
+const hasSingers = song => song.structure
+  .flatMap(b => b.parts || [b])
+  .flatMap(p => (p.lyrics || []).flat())
+  .some(s => splitLines(s).some(l => SINGER.test(l)));
 
 /* ---------- Estrutura ---------- */
 
@@ -38,7 +58,7 @@ function partHTML(song, part, pass, flow) {
       ${changes ? `<span class="bpm">${part.bpm} bpm</span>` : ""}
       <span class="bars"><b>${part.bars}</b>${part.bars === 1 ? "compasso" : "compassos"}</span>
     </div>
-    ${lyricsHTML(lyrics)}
+    ${lyricsHTML(lyrics, flow.sung)}
   </div>`;
 }
 
@@ -49,7 +69,7 @@ function repeatHTML(song, block, flow) {
 }
 
 function renderSong(song) {
-  const flow = { bpm: null };
+  const flow = { bpm: null, sung: hasSingers(song) };
   const blocks = song.structure.map(block =>
     (block.repeat ? repeatHTML(song, block, flow) : partHTML(song, block, null, flow))).join("");
 

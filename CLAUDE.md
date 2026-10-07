@@ -14,7 +14,7 @@ O site publicado (https://lucaszmiranda.github.io/covenant-rites/, GitHub Pages)
 ## Detalhes que já custaram tempo
 
 - **Cache:** `index.html` carrega `style.css?v=N` e `app.js?v=N`. Mudou CSS ou JS, sobe o N nos dois, senão o celular da banda continua com a versão velha.
-- **Letra:** em parte sem repetição, `lyrics` é uma lista de estrofes (string). Dentro da estrofe, `\n` ou ` — ` quebram a linha. Em bloco `repeat`, `lyrics` é uma lista por passada, e cada passada é uma lista de estrofes.
+- **Letra:** em parte sem repetição, `lyrics` é uma lista de estrofes (string). Dentro da estrofe, `\n` ou ` — ` quebram a linha. Em bloco `repeat`, `lyrics` é uma lista por passada, e cada passada é uma lista de estrofes. `[Felipe] ` / `[Lucas] ` no começo da linha marca quem canta (cores em `singers` no `setlist.json`); `*trecho*` vira destaque.
 - **Cor:** `colors` é por nome de parte. Parte que deve herdar a cor de outra usa `"color": "<nome da outra>"`.
 - **Botão do setlist:** música só fica clicável com `"ready": true` em `data/setlist.json`. Hoje faltam Deathcrush (Mayhem) e The Return of Darkness and Evil (Behemoth).
 - **Fonte da estrutura:** os .gp em `gp/`. O Guitar Pro é referência; a versão da banda manda (ex.: Black Metal ficou toda em 163 bpm de propósito, mesmo o .gp tendo 160 num trecho). Na dúvida sobre como a banda toca, pergunte.

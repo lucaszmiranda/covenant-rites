@@ -104,6 +104,18 @@ main { max-width: 960px; margin: 0 auto; padding: 0 16px 64px; }
 
 .lyrics { margin-top: 8px; display: grid; gap: 14px; }
 .lyrics p { margin: 0; font-size: 21px; font-weight: 500; line-height: 1.35; }
+.lyrics em { font-style: normal; font-weight: 800; color: #fff6e2; text-decoration: underline 2px; text-underline-offset: 4px; }
+
+/* Quem canta: coluna estreita à esquerda, na cor do vocalista */
+.lyrics .sung { display: grid; grid-template-columns: 50px 1fr; column-gap: 8px; align-items: baseline; }
+.who {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--who, var(--ink));
+}
 
 
 .error { color: var(--muted); padding: 32px 0; }

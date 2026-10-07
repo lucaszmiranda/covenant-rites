@@ -23,7 +23,7 @@
       "name": "Verse 1/2",
       "bars": 8,
       "lyrics": [
-        "Black is the night, metal we fight\nPower amps set to explode",
+        "[Felipe] Black is the night, metal we fight\nPower amps set to explode",
         "Energy screams, magic and dreams\nSatan records their first note"
       ]
     },
@@ -31,22 +31,22 @@
       "name": "Verse 2/2",
       "bars": 8,
       "lyrics": [
-        "We chime the bell, chaos in Hell\nMetal for maniacs pure",
-        "Fast-melting steel, fortune on wheels\nBrain hemorrhage is the cure"
+        "[Lucas] We chime the bell, chaos in Hell\nMetal for maniacs pure",
+        "[Felipe] Fast-melting steel, fortune on wheels\nBrain hemorrhage is the cure"
       ]
     },
     {
       "name": "Chorus",
       "bars": 10,
       "lyrics": [
-        "For black metal\nBlack metal\nBlack metal\nBlack metal"
+        "[Felipe] For black metal\n[Lucas] Black metal\n[Felipe] Black metal\n[Lucas] Black metal\n[Felipe] Black metal"
       ]
     },
     {
       "name": "Bridge",
       "bars": 2,
       "lyrics": [
-        "Lay down your soul to the gods rock 'n' roll"
+        "[Felipe] Lay down your soul to the gods rock 'n' roll"
       ]
     },
     {
@@ -57,7 +57,7 @@
       "name": "Verse 1/2",
       "bars": 8,
       "lyrics": [
-        "Freaking so wild, nobody's mild\nGiving it all that you've got",
+        "[Lucas] Freaking so wild, nobody's mild\nGiving it all that you've got",
         "Wild is so right, metal tonight\nFaster and over the top"
       ]
     },
@@ -65,32 +65,32 @@
       "name": "Verse 2/2",
       "bars": 8,
       "lyrics": [
-        "Open the core, enter Hell's door\nBlack is the code for tonight",
-        "Atomic force, feel no remorse\nCrank up the amps, now it's night"
+        "[Felipe] Open the core, enter Hell's door\nBlack is the code for tonight",
+        "[Lucas] Atomic force, feel no remorse\nCrank up the amps, now it's night"
       ]
     },
     {
       "name": "Chorus",
       "bars": 10,
       "lyrics": [
-        "Black metal\nBlack metal\nBlack metal\nBlack metal"
+        "[Lucas] Black metal\n[Felipe] Black metal\n[Lucas] Black metal\n[Felipe] Black metal\n[Lucas] Black metal"
       ]
     },
     {
       "name": "Bridge (Long)",
       "bars": 8,
       "lyrics": [
-        "Lay down your soul to the gods rock 'n' roll",
-        "Metal ten fold through the deadly black hole",
-        "Riding Hell's stallions bareback and free",
-        "Taking our chances with raw energy"
+        "[Felipe] Lay down your soul to the gods rock 'n' roll",
+        "[Lucas] Metal ten fold through the deadly black hole",
+        "[Felipe] Riding Hell's stallions bareback and free",
+        "[Lucas] Taking our chances with raw energy"
       ]
     },
     {
       "name": "Verse 3/X",
       "bars": 10,
       "lyrics": [
-        "Come ride the night with us, rock hard and fight\nUnited my legions, we stand",
+        "[Felipe] Come ride the night with us, rock hard and fight\nUnited my legions, we stand",
         "Freak hard and wild for us, give up your souls\nLive for the quest Satan's band"
       ]
     },
@@ -106,31 +106,31 @@
       "name": "Verse 1/2",
       "bars": 8,
       "lyrics": [
-        "Against these odds, black metal gods\nFight to achieve our goal",
-        "Casting a spell, leather and Hell\nBlack metal gods rock 'n' roll"
+        "[Felipe] Against these odds, *black metal gods*\nFight to achieve our goal",
+        "Casting a spell, *leather and Hell*\nBlack metal gods rock 'n' roll"
       ]
     },
     {
       "name": "Verse 2/2",
       "bars": 8,
       "lyrics": [
-        "Building up steam, nuclear screams\nWarheads are ready to fight",
-        "Black leather hounds, faster than sound\nMetal our purpose in life"
+        "[Lucas] Building up steam, nuclear screams\nWarheads are ready to fight",
+        "[Felipe] Black leather hounds, faster than sound\n*Metal our purpose in life*"
       ]
     },
     {
       "name": "Chorus",
       "bars": 10,
       "lyrics": [
-        "Black metal\nBlack metal\nBlack metal\nBlack metal"
+        "[Felipe] For black metal\n[Lucas] Black metal\n[Felipe] Black metal\n[Lucas] Black metal\n[Felipe] Black metal"
       ]
     },
     {
       "name": "Bridge/Ending",
       "bars": 6,
       "lyrics": [
-        "Lay down your soul to the gods rock 'n' roll",
-        "Ohhh black metal"
+        "[Felipe/Lucas] Lay down your soul to the gods rock 'n' roll",
+        "Ohhh ohhh oooohhhhh BLACK METAL"
       ]
     }
   ]

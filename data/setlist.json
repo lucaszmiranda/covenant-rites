@@ -1,5 +1,6 @@
 {
   "event": "17.10.26",
+  "singers": { "Felipe": "#7fd1b9", "Lucas": "#c4b0ff" },
   "songs": [
     { "id": "deathcrush", "artist": "Mayhem", "title": "Deathcrush" },
     { "id": "freezing-moon", "artist": "Mayhem", "title": "Freezing Moon", "ready": true },
