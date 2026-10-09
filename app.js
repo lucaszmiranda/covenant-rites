@@ -98,20 +98,26 @@ function renderSong(song) {
 
 /* ---------- Ordem do show ---------- */
 
-// Lista reta do show: o que acontece antes de cada música ("before") e a música em si.
+// Tudo vira bloco, em sequência: o que vem antes de cada música ("before"), depois a música com as suas "notes".
+// Bloco de "before" é texto (uma fala ou um momento) ou { title, artist, notes } (ex.: a faixa de intro).
 // Em nota, "**trecho**" sai em negrito e "*trecho*" em itálico.
 const noteText = s => esc(s).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/\*([^*]+)\*/g, "<i>$1</i>");
+const notesHTML = notes => (notes || []).length ? `<ul class="cue-notes">${notes.map(n => `<li>${noteText(n)}</li>`).join("")}</ul>` : "";
+
+const cueHTML = c => typeof c === "string"
+  ? `<div class="cue"><p>${noteText(c)}</p></div>`
+  : `<div class="cue"><p><b>${esc(c.title)}</b>${c.artist ? ` <small>${esc(c.artist)}</small>` : ""}</p>${notesHTML(c.notes)}</div>`;
 
 function renderShow() {
   const steps = setlist.songs.map((s, i) => `
-    ${(s.before || []).length ? `<ul class="between">${s.before.map(n => `<li>${noteText(n)}</li>`).join("")}</ul>` : ""}
+    ${(s.before || []).map(cueHTML).join("")}
     <button class="show-song" data-id="${esc(s.id)}"${s.ready ? "" : " disabled"}>
-      <span class="n">${i + 1}</span>
-      <span><b>${esc(s.title)}</b> <small>${esc(s.artist)}</small></span>
+      <p><span class="n">${i + 1}</span> <b>${esc(s.title)}</b> <small>${esc(s.artist)}</small></p>
+      ${notesHTML(s.notes)}
     </button>`).join("");
   $("#show").innerHTML = `
     <summary>Ordem do show <small>${esc(setlist.event)}${setlist.start ? ` · início ${esc(setlist.start)}` : ""}</small></summary>
-    <div class="show-body">${steps}</div>`;
+    <div class="show-body">${notesHTML(setlist.opening)}${steps}</div>`;
 }
 
 /* ---------- Setlist ---------- */

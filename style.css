@@ -64,34 +64,34 @@ body {
 .show[open] summary::before { content: "▾"; }
 .show summary small { color: var(--muted); font-weight: 500; font-size: 14px; }
 .show-body { display: flex; flex-direction: column; gap: 6px; padding: 10px 0 4px; }
-.show-song {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
+.show-song, .cue {
   text-align: left;
   font: inherit;
   color: var(--ink);
   background: var(--card);
   border: 1px solid var(--line);
-  border-left: 4px solid var(--accent);
   border-radius: 8px;
   padding: 8px 14px;
-  cursor: pointer;
 }
-.show-song:disabled { cursor: default; border-left-color: var(--line); }
-.show-song .n { color: var(--accent); font-weight: 800; }
-.show-song b { font-weight: 800; }
-.show-song small { color: var(--muted); font-size: 14px; }
-.between {
-  margin: 0 0 0 18px;
-  padding: 2px 0 2px 16px;
-  border-left: 2px dashed var(--line);
+.show-song p, .cue p { margin: 0; }
+.show-song { border-left: 4px solid var(--accent); cursor: pointer; }
+.show-song:disabled { cursor: default; }
+.show-song .n { color: var(--accent); font-weight: 800; margin-right: 4px; }
+.show-song b, .cue b { font-weight: 800; }
+.show-song small, .cue small { color: var(--muted); font-size: 14px; }
+/* Fala ou momento entre músicas: mesmo nível da música, sem preenchimento */
+.cue { background: transparent; border-style: dashed; font-size: 15px; }
+.cue-notes {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
   color: var(--muted);
   font-size: 15px;
-  list-style: none;
 }
-.between li + li { margin-top: 4px; }
-.between b { color: var(--ink); }
+.cue-notes li::before { content: "– "; }
+.cue-notes li + li { margin-top: 3px; }
+.cue-notes b { color: var(--ink); }
+.show-body > .cue-notes { margin: 0 0 2px 2px; }
 
 /* Escolha da música */
 .setlist {

@@ -2,10 +2,26 @@
   "event": "17.10.26",
   "start": "19:20–19:30",
   "singers": { "Felipe": "#7fd1b9", "Lucas": "#c4b0ff" },
+  "opening": [
+    "Banda se prepara e desce do palco."
+  ],
   "songs": [
     {
-      "id": "deathcrush", "artist": "Mayhem", "title": "Deathcrush",
-      "before": ["Toca **Silvester Anfang** (Mayhem), e a banda entra direto em Deathcrush."],
+      "id": "deathcrush",
+      "artist": "Mayhem",
+      "title": "Deathcrush",
+      "before": [
+        {
+          "title": "Intro: Silvester Anfang",
+          "artist": "Mayhem",
+          "notes": [
+            "Instrumentistas sobem enquanto a faixa de introdução toca."
+          ]
+        }
+      ],
+      "notes": [
+        "Luana sobe no palco ao mesmo tempo em que o 1º riff é puxado."
+      ],
       "info": {
         "Formação": "Luana (voz) • Lucas (guitarra 1) • Willian (guitarra 2) • Felipe (baixo) • Pablo (bateria)",
         "Referência": "versão ao vivo do álbum Daemonic Rites (2022)",
@@ -13,11 +29,12 @@
       }
     },
     {
-      "id": "freezing-moon", "artist": "Mayhem", "title": "Freezing Moon", "ready": true,
+      "id": "freezing-moon",
+      "artist": "Mayhem",
+      "title": "Freezing Moon",
+      "ready": true,
       "before": [
-        "Ninguém fala nada.",
-        "Luana espera alguns segundos enquanto os instrumentos afinam.",
-        "Depois ela puxa a abertura igual ao Dead no *Live in Leipzig*: \"When it's cold... and when it's dark...\""
+        "Luana anuncia Freezing Moon ao estilo do Dead em Leipzig: \"When it's cold... and when it's dark...\""
       ],
       "info": {
         "Formação": "Luana/Willian (voz) • Lucas (guitarra 1) • Willian (guitarra 2) • Felipe (baixo) • Pablo (bateria)",
@@ -26,11 +43,13 @@
       }
     },
     {
-      "id": "circle-of-the-tyrants", "artist": "Celtic Frost", "title": "Circle of the Tyrants", "ready": true,
+      "id": "circle-of-the-tyrants",
+      "artist": "Celtic Frost",
+      "title": "Circle of the Tyrants",
+      "ready": true,
       "before": [
-        "Apresentação do projeto **Covenant Rites**.",
-        "Depois, apresentação de quem está no palco, com a Luana ainda lá.",
-        "Luana desce, e o Diego é chamado."
+        "Antes de a Luana descer do palco: apresentação do projeto **Covenant Rites** e de quem está tocando na noite, e daí a chamada do Diego.",
+        "Depois do riff de intro de *Transilvanian Hunger*, anunciar que vamos descer pra 1ª onda com Celtic Frost."
       ],
       "info": {
         "Formação": "Diego (voz) • Lucas (guitarra 1) • Felipe (baixo) • Pablo (bateria)",
@@ -40,7 +59,12 @@
       }
     },
     {
-      "id": "the-return-of-darkness-and-evil", "artist": "Behemoth", "title": "The Return of Darkness and Evil",
+      "id": "the-return-of-darkness-and-evil",
+      "artist": "Behemoth",
+      "title": "The Return of Darkness and Evil",
+      "before": [
+        "Enquanto o Pablo puxa na bateria, anunciar que vamos tocar mais uma das bandas pioneiras, **Bathory**."
+      ],
       "info": {
         "Formação": "Willian (voz) • Lucas (guitarra 1) • Willian (guitarra 2) • Felipe (baixo) • Pablo (bateria)",
         "Referência": "cover do Behemoth (Bathory), single The Return of Darkness and Evil (2026)",
@@ -49,7 +73,13 @@
       }
     },
     {
-      "id": "black-metal", "artist": "Venom", "title": "Black Metal", "ready": true,
+      "id": "black-metal",
+      "artist": "Venom",
+      "title": "Black Metal",
+      "ready": true,
+      "before": [
+        "Comentar rapidamente sobre os planos de tocar \"essa banda\": não era a intenção fechar o show com ela, mas com o falecimento de Conrad Lant, mais conhecido como Cronos, não houve alternativa senão encerrar a apresentação temática de clássicos de black metal com o som que mais eternizou o legado do Cronos e da banda dele, Venom. Terminar berrando **BLAAAACK MEEETAAAAALLLL**."
+      ],
       "info": {
         "Formação": "Lucas (guitarra 1/voz) • Felipe (baixo/voz) • Pablo (bateria)",
         "Referência": "versão de estúdio do álbum Black Metal (1982)",
