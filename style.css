@@ -74,13 +74,11 @@ body {
   padding: 8px 14px;
 }
 .show-song p, .cue p { margin: 0; }
-.show-song { border-left: 4px solid var(--accent); cursor: pointer; }
+.show-song { cursor: pointer; }
 .show-song:disabled { cursor: default; }
 .show-song .n { color: var(--accent); font-weight: 800; margin-right: 4px; }
 .show-song b, .cue b { font-weight: 800; }
 .show-song small, .cue small { color: var(--muted); font-size: 14px; }
-/* Fala ou momento entre músicas: mesmo nível da música, sem preenchimento */
-.cue { background: transparent; border-style: dashed; font-size: 15px; }
 .cue-notes {
   margin: 6px 0 0;
   padding: 0;
