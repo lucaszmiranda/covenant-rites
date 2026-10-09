@@ -111,12 +111,12 @@ const cueHTML = c => typeof c === "string"
 function renderShow() {
   const steps = setlist.songs.map((s, i) => `
     ${(s.before || []).map(cueHTML).join("")}
-    <button class="show-song" data-id="${esc(s.id)}"${s.ready ? "" : " disabled"}>
+    <div class="show-song${s.ready ? " ready" : ""}" data-id="${esc(s.id)}">
       <p><span class="n">${i + 1}</span> <b>${esc(s.title)}</b> <small>${esc(s.artist)}</small></p>
       ${notesHTML(s.notes)}
-    </button>`).join("");
+    </div>`).join("");
   $("#show").innerHTML = `
-    <summary>Ordem do show <small>${esc(setlist.event)}${setlist.start ? ` · início ${esc(setlist.start)}` : ""}</small></summary>
+    <summary>ORDEM DO SHOW</summary>
     <div class="show-body">${notesHTML(setlist.opening)}${steps}</div>`;
 }
 
@@ -143,9 +143,10 @@ async function init() {
   setlist = await getJSON("data/setlist.json");
   renderShow();
 
+  // Bloco de música é div (não botão) pra dar pra selecionar o texto; clique que só selecionou texto não troca de música.
   $("#show").addEventListener("click", e => {
-    const btn = e.target.closest(".show-song");
-    if (!btn || btn.disabled) return;
+    const btn = e.target.closest(".show-song.ready");
+    if (!btn || String(getSelection())) return;
     show(btn.dataset.id);
     $("#setlist").scrollIntoView({ behavior: "smooth" });
   });

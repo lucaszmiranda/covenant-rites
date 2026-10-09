@@ -74,8 +74,7 @@ body {
   padding: 8px 14px;
 }
 .show-song p, .cue p { margin: 0; }
-.show-song { cursor: pointer; }
-.show-song:disabled { cursor: default; }
+.show-song.ready { cursor: pointer; }
 .show-song .n { color: var(--accent); font-weight: 800; margin-right: 4px; }
 .show-song b, .cue b { font-weight: 800; }
 .show-song small, .cue small { color: var(--muted); font-size: 14px; }

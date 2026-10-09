@@ -1,6 +1,5 @@
 {
   "event": "17.10.26",
-  "start": "19:20–19:30",
   "singers": { "Felipe": "#7fd1b9", "Lucas": "#c4b0ff" },
   "opening": [
     "Banda se prepara e desce do palco."
@@ -48,7 +47,7 @@
       "title": "Circle of the Tyrants",
       "ready": true,
       "before": [
-        "Antes de a Luana descer do palco: apresentação do projeto **Covenant Rites** e de quem está tocando na noite, e daí a chamada do Diego.",
+        "Antes de a Luana descer do palco: apresentação do projeto Covenant Rites e de quem está tocando na noite, e daí a chamada do Diego.",
         "Depois do riff de intro de *Transilvanian Hunger*, rapidamente anunciar que vamos descer pra 1ª onda com Celtic Frost."
       ],
       "info": {
