@@ -39,6 +39,60 @@ body {
   filter: drop-shadow(0 0 22px color-mix(in srgb, var(--accent) 30%, transparent));
 }
 
+/* Ordem do show: abre e fecha, acima da escolha da música */
+.show {
+  max-width: 960px;
+  margin: 0 auto 10px;
+  padding: 0 16px;
+}
+.show summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 10px;
+  white-space: nowrap;
+  padding: 10px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-weight: 800;
+}
+.show summary::-webkit-details-marker { display: none; }
+.show summary::before { content: "▸"; color: var(--accent); }
+.show[open] summary::before { content: "▾"; }
+.show summary small { color: var(--muted); font-weight: 500; font-size: 14px; }
+.show-body { display: flex; flex-direction: column; gap: 6px; padding: 10px 0 4px; }
+.show-song {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.show-song:disabled { cursor: default; border-left-color: var(--line); }
+.show-song .n { color: var(--accent); font-weight: 800; }
+.show-song b { font-weight: 800; }
+.show-song small { color: var(--muted); font-size: 14px; }
+.between {
+  margin: 0 0 0 18px;
+  padding: 2px 0 2px 16px;
+  border-left: 2px dashed var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  list-style: none;
+}
+.between li + li { margin-top: 4px; }
+.between b { color: var(--ink); }
+
 /* Escolha da música */
 .setlist {
   position: sticky;
@@ -117,5 +171,11 @@ main { max-width: 960px; margin: 0 auto; padding: 0 16px 64px; }
   color: var(--who, var(--ink));
 }
 
+/* Infos da música: formação, referência, tom */
+.info { margin: 0; display: grid; gap: 4px; font-size: 15px; }
+.info div { display: grid; grid-template-columns: 92px 1fr; column-gap: 8px; }
+.info dt { color: var(--muted); font-weight: 500; }
+.info dd { margin: 0; }
+.member { display: inline-block; white-space: nowrap; margin-right: 14px; }
 
 .error { color: var(--muted); padding: 32px 0; }

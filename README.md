@@ -5,7 +5,7 @@ Página única com o mapa de cada música do setlist: as partes em ordem, quanto
 ## Arquivos
 
 - `index.html`, `style.css`, `app.js`: a página. Sem build, sem dependência.
-- `data/setlist.json`: evento e ordem das músicas (vira os botões do topo). Só fica clicável a música com `"ready": true`.
+- `data/setlist.json`: evento, horário e ordem das músicas (vira os botões do topo e o bloco "Ordem do show"). Só fica clicável a música com `"ready": true`. Cada música pode ter `before` (o que acontece antes dela no show, uma linha por item, `**negrito**` e `*itálico*` valem) e `info` (Formação, Referência, Tom, Nota, copiados do README.docx da pasta do evento no Drive; aparecem no topo da música).
 - `data/songs/<id>.json`: uma música: título, banda, cores e estrutura.
 - `gp/`: arquivos Guitar Pro de referência, usados pra levantar a estrutura.
 

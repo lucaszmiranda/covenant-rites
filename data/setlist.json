@@ -1,11 +1,60 @@
 {
   "event": "17.10.26",
+  "start": "19:20–19:30",
   "singers": { "Felipe": "#7fd1b9", "Lucas": "#c4b0ff" },
   "songs": [
-    { "id": "deathcrush", "artist": "Mayhem", "title": "Deathcrush" },
-    { "id": "freezing-moon", "artist": "Mayhem", "title": "Freezing Moon", "ready": true },
-    { "id": "circle-of-the-tyrants", "artist": "Celtic Frost", "title": "Circle of the Tyrants", "ready": true },
-    { "id": "the-return-of-darkness-and-evil", "artist": "Behemoth", "title": "The Return of Darkness and Evil" },
-    { "id": "black-metal", "artist": "Venom", "title": "Black Metal", "ready": true }
+    {
+      "id": "deathcrush", "artist": "Mayhem", "title": "Deathcrush",
+      "before": ["Toca **Silvester Anfang** (Mayhem), e a banda entra direto em Deathcrush."],
+      "info": {
+        "Formação": "Luana (voz) • Lucas (guitarra 1) • Willian (guitarra 2) • Felipe (baixo) • Pablo (bateria)",
+        "Referência": "versão ao vivo do álbum Daemonic Rites (2022)",
+        "Tom": "C# (meio tom abaixo da referência)"
+      }
+    },
+    {
+      "id": "freezing-moon", "artist": "Mayhem", "title": "Freezing Moon", "ready": true,
+      "before": [
+        "Ninguém fala nada.",
+        "Luana espera alguns segundos enquanto os instrumentos afinam.",
+        "Depois ela puxa a abertura igual ao Dead no *Live in Leipzig*: \"When it's cold... and when it's dark...\""
+      ],
+      "info": {
+        "Formação": "Luana/Willian (voz) • Lucas (guitarra 1) • Willian (guitarra 2) • Felipe (baixo) • Pablo (bateria)",
+        "Referência": "versão de estúdio do álbum De Mysteriis Dom Sathanas (1994)",
+        "Tom": "Eb (meio tom abaixo da referência)"
+      }
+    },
+    {
+      "id": "circle-of-the-tyrants", "artist": "Celtic Frost", "title": "Circle of the Tyrants", "ready": true,
+      "before": [
+        "Willian apresenta o projeto **Covenant Rites**.",
+        "Depois apresenta quem está no palco, com a Luana ainda lá.",
+        "Luana desce, e aí chamam o Diego."
+      ],
+      "info": {
+        "Formação": "Diego (voz) • Lucas (guitarra 1) • Felipe (baixo) • Pablo (bateria)",
+        "Referência": "versão de estúdio do álbum To Mega Therion (1985)",
+        "Tom": "Eb (meio tom abaixo da referência)",
+        "Nota": "caso o Diego não consiga comparecer, Lucas e Felipe vão dividir o main vocal."
+      }
+    },
+    {
+      "id": "the-return-of-darkness-and-evil", "artist": "Behemoth", "title": "The Return of Darkness and Evil",
+      "info": {
+        "Formação": "Willian (voz) • Lucas (guitarra 1) • Willian (guitarra 2) • Felipe (baixo) • Pablo (bateria)",
+        "Referência": "cover do Behemoth (Bathory), single The Return of Darkness and Evil (2026)",
+        "Tom": "C# (o mesmo da referência)",
+        "Nota": "o cover é da versão lançada na compilação Scandinavian Metal Attack (1984), que difere um pouco da versão do álbum The Return… (1985)."
+      }
+    },
+    {
+      "id": "black-metal", "artist": "Venom", "title": "Black Metal", "ready": true,
+      "info": {
+        "Formação": "Lucas (guitarra 1/voz) • Felipe (baixo/voz) • Pablo (bateria)",
+        "Referência": "versão de estúdio do álbum Black Metal (1982)",
+        "Tom": "Eb (um tom acima da referência)"
+      }
+    }
   ]
 }

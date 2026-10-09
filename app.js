@@ -68,6 +68,19 @@ function repeatHTML(song, block, flow) {
     block.parts.map(p => partHTML(song, p, k, flow)).join("")).join("");
 }
 
+/* ---------- Infos da música (do README da banda) ---------- */
+
+// "Formação" vem como "Nome (papel) • Nome (papel)"; cada pessoa vira uma linha que não quebra no meio.
+function infoHTML(id) {
+  const info = (setlist.songs.find(s => s.id === id) || {}).info;
+  if (!info) return "";
+  const value = (k, v) => k === "Formação"
+    ? v.split(" • ").map(x => `<span class="member">${esc(x)}</span>`).join("")
+    : esc(v);
+  return `<dl class="info">${Object.entries(info).map(([k, v]) =>
+    `<div><dt>${esc(k)}</dt><dd>${value(k, v)}</dd></div>`).join("")}</dl>`;
+}
+
 function renderSong(song) {
   const flow = { bpm: null, sung: hasSingers(song) };
   const blocks = song.structure.map(block =>
@@ -77,9 +90,28 @@ function renderSong(song) {
     <section class="head">
       <h1>${esc(song.title)}</h1>
       <p class="artist">${esc(song.artist)}</p>
+      ${infoHTML(song.id)}
     </section>
     <section class="structure">${blocks}</section>`;
   document.title = `${song.title} · Covenant Rites`;
+}
+
+/* ---------- Ordem do show ---------- */
+
+// Lista reta do show: o que acontece antes de cada música ("before") e a música em si.
+// Em nota, "**trecho**" sai em negrito e "*trecho*" em itálico.
+const noteText = s => esc(s).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/\*([^*]+)\*/g, "<i>$1</i>");
+
+function renderShow() {
+  const steps = setlist.songs.map((s, i) => `
+    ${(s.before || []).length ? `<ul class="between">${s.before.map(n => `<li>${noteText(n)}</li>`).join("")}</ul>` : ""}
+    <button class="show-song" data-id="${esc(s.id)}"${s.ready ? "" : " disabled"}>
+      <span class="n">${i + 1}</span>
+      <span><b>${esc(s.title)}</b> <small>${esc(s.artist)}</small></span>
+    </button>`).join("");
+  $("#show").innerHTML = `
+    <summary>Ordem do show <small>${esc(setlist.event)}${setlist.start ? ` · início ${esc(setlist.start)}` : ""}</small></summary>
+    <div class="show-body">${steps}</div>`;
 }
 
 /* ---------- Setlist ---------- */
@@ -103,6 +135,14 @@ async function show(id) {
 
 async function init() {
   setlist = await getJSON("data/setlist.json");
+  renderShow();
+
+  $("#show").addEventListener("click", e => {
+    const btn = e.target.closest(".show-song");
+    if (!btn || btn.disabled) return;
+    show(btn.dataset.id);
+    $("#setlist").scrollIntoView({ behavior: "smooth" });
+  });
 
   $("#setlist").addEventListener("click", e => {
     const btn = e.target.closest("button");
