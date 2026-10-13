@@ -1,6 +1,11 @@
 {
   "event": "17.10.26",
-  "singers": { "Felipe": "#7fd1b9", "Lucas": "#c4b0ff" },
+  "singers": {
+    "Felipe": "#7fd1b9",
+    "Lucas": "#c4b0ff",
+    "Luana": { "photo": "assets/singers/luana.jpg" },
+    "Willian": { "photo": "assets/singers/willian.jpg" }
+  },
   "opening": [
     "Banda se prepara e desce do palco."
   ],

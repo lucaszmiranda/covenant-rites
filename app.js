@@ -24,11 +24,20 @@ const SINGER = /^\[([^\]]+)\]\s*/;
 const splitLines = s => s.split(/ — |\n/);
 const text = l => esc(l).replace(/\*([^*]+)\*/g, "<em>$1</em>");
 
+// Em "singers", cada nome tem uma cor ("#hex") ou { "photo", "color" }; com foto, o rosto entra no lugar do nome.
 function singerHTML(l) {
   const m = l.match(SINGER);
   if (!m) return `<span class="who"></span>`;
-  const color = (setlist.singers || {})[m[1]];
-  return `<span class="who"${color ? ` style="--who:${color}"` : ""}>${m[1].split("/").map(esc).join("/<wbr>")}</span>`;
+  const names = m[1].split("/");
+  const info = names.map(n => {
+    const v = (setlist.singers || {})[n];
+    return typeof v === "string" ? { color: v } : v || {};
+  });
+  if (info.every(i => i.photo)) {
+    return `<span class="who who-pics">${info.map((i, k) => `<img src="${esc(i.photo)}" alt="${esc(names[k])}" title="${esc(names[k])}">`).join("")}</span>`;
+  }
+  const color = info[0].color;
+  return `<span class="who"${color ? ` style="--who:${color}"` : ""}>${names.map(esc).join("/<wbr>")}</span>`;
 }
 
 // Com cantor marcado, cada linha ganha a coluna do nome à esquerda (vazia quando segue o mesmo cantor).

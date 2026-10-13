@@ -167,6 +167,8 @@ main { max-width: 960px; margin: 0 auto; padding: 0 16px 64px; }
   line-height: 1.2;
   color: var(--who, var(--ink));
 }
+.who-pics { display: flex; gap: 3px; align-self: start; padding-top: 1px; }
+.who-pics img { width: 32px; height: 32px; border-radius: 5px; object-fit: cover; display: block; }
 
 /* Infos da música: formação, referência, tom */
 .info { margin: 0; display: grid; gap: 4px; font-size: 15px; }
