@@ -20,7 +20,7 @@ O site publicado (https://lucaszmiranda.github.io/covenant-rites/, GitHub Pages)
 - **Entremúsicas e infos:** a ordem do show fica no `data/setlist.json`: `opening` no topo, `before` (blocos antes de cada música) e `notes` (linhas dentro do bloco da música), formato no README; Formação/Referência/Tom ficam em `info` e vêm do `README.docx` em `G:\Meu Drive\MÚSICA\COVENANT RITES\EVENTO 17-10-26\SETLIST`. Se o README mudar, atualizar aqui também. A ordem do README pode estar velha; a ordem que vale é a do `setlist.json`.
 - **Fonte da estrutura:** os .gp em `gp/`. O Guitar Pro é referência; a versão da banda manda (ex.: Black Metal ficou toda em 163 bpm de propósito, mesmo o .gp tendo 160 num trecho). Na dúvida sobre como a banda toca, pergunte.
 - Existe um rascunhador automático de .gp pro formato deste repo em `C:\Users\lucas\github-projects\music-app-idea\prototipos\gp-import` (AlphaTab). Bom quando o .gp tem seções marcadas; sempre revisar o resultado à mão.
-- Artifact espelho do site, público por link: https://claude.ai/artifact/3xzHWDiqp5AaFqQ15Aqq5s. Se for republicado, manter igual ao repo.
+- Artifact espelho do site, público por link: https://claude.ai/artifact/3xzHWDiqp5AaFqQ15Aqq5s. **Toda alteração republica o artifact também**, junto com o push (o Lucas cobra). É o `index.html` com `style.css` e `app.js` colados inline, mais `assets/` e `data/` como arquivos.
 
 ## Projeto vizinho
 
