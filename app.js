@@ -25,14 +25,15 @@ const splitLines = s => s.split(/ — |\n/);
 const text = l => esc(l).replace(/\*([^*]+)\*/g, "<em>$1</em>");
 
 // Em "singers", cada nome tem uma cor ("#hex") ou { "photo", "color" }; com foto, o rosto entra no lugar do nome.
-function singerHTML(l) {
-  const m = l.match(SINGER);
-  if (!m) return `<span class="who"></span>`;
-  const names = m[1].split("/");
-  const info = names.map(n => {
-    const v = (setlist.singers || {})[n];
-    return typeof v === "string" ? { color: v } : v || {};
-  });
+const singerInfo = n => {
+  const v = (setlist.singers || {})[n];
+  return typeof v === "string" ? { color: v } : v || {};
+};
+
+function singerHTML(who) {
+  if (!who) return `<span class="who"></span>`;
+  const names = who.split("/");
+  const info = names.map(singerInfo);
   if (info.every(i => i.photo)) {
     return `<span class="who who-pics">${info.map((i, k) => `<img src="${esc(i.photo)}" alt="${esc(names[k])}" title="${esc(names[k])}">`).join("")}</span>`;
   }
@@ -40,34 +41,59 @@ function singerHTML(l) {
   return `<span class="who"${color ? ` style="--who:${color}"` : ""}>${names.map(esc).join("/<wbr>")}</span>`;
 }
 
-// Com cantor marcado, cada linha ganha a coluna do nome à esquerda (vazia quando segue o mesmo cantor).
-const stanza = (s, sung) => sung
-  ? `<p class="sung">${splitLines(s).map(l => `${singerHTML(l)}<span>${text(l.replace(SINGER, ""))}</span>`).join("")}</p>`
-  : `<p>${splitLines(s).map(text).join("<br>")}</p>`;
+// Cada linha vira { who, mark, text }: quem canta segue valendo até o próximo "[Nome]", mesmo em outra parte.
+function stanzaLines(s, flow) {
+  return splitLines(s).map(l => {
+    const m = l.match(SINGER);
+    if (m) flow.who = m[1];
+    return { who: flow.who, mark: !!m, text: l.replace(SINGER, "") };
+  });
+}
 
-const lyricsHTML = (lines, sung) => (lines && lines.length ? `<div class="lyrics">${lines.map(s => stanza(s, sung)).join("")}</div>` : "");
+// Com um vocalista escolhido, só ficam as linhas dele (inclusive as que ele canta junto, "[A/B]").
+// Aí a foto/nome só aparece quando muda quem canta na estrofe (sem repetir a cada linha).
+function stanzaHTML(s, flow) {
+  const pick = flow.opts.singer;
+  let lines = stanzaLines(s, flow);
+  if (pick) lines = lines.filter(l => l.who && l.who.split("/").includes(pick));
+  if (!lines.length) return "";
+  if (!flow.sung) return `<p>${lines.map(l => text(l.text)).join("<br>")}</p>`;
+  return `<p class="sung">${lines.map((l, i) =>
+    `${singerHTML((pick ? i === 0 || l.who !== lines[i - 1].who : l.mark) ? l.who : null)}<span>${text(l.text)}</span>`).join("")}</p>`;
+}
 
-const hasSingers = song => song.structure
-  .flatMap(b => b.parts || [b])
-  .flatMap(p => (p.lyrics || []).flat())
-  .some(s => splitLines(s).some(l => SINGER.test(l)));
+const lyricsHTML = (stanzas, flow) => (stanzas || []).map(s => stanzaHTML(s, flow)).join("");
+
+// Vocalistas da música, na ordem em que aparecem.
+const singersOf = song => [...new Set(song.structure
+  .flatMap(b => b.parts ? Array.from({ length: b.repeat }, (_, k) => b.parts.map(p => (p.lyrics || [])[k])) : [b.lyrics])
+  .flat(2)
+  .filter(Boolean)
+  .flatMap(splitLines)
+  .map(l => (l.match(SINGER) || [])[1])
+  .filter(Boolean)
+  .flatMap(n => n.split("/")))];
 
 /* ---------- Estrutura ---------- */
 
 // Tudo aparece na ordem em que a música acontece.
 // O selo de bpm só aparece onde o andamento muda de fato em relação ao que vinha tocando.
+// "Apenas letra" esconde a parte que fica sem letra (depois do filtro de vocalista).
+// O selo de bpm compara com a última parte que apareceu na tela.
 function partHTML(song, part, pass, flow) {
   const color = song.colors[part.color || part.name] || "#999";
-  const lyrics = pass == null ? part.lyrics : (part.lyrics || [])[pass];
-  const changes = part.bpm && part.bpm !== flow.bpm;
+  const lyrics = lyricsHTML(pass == null ? part.lyrics : (part.lyrics || [])[pass], flow);
   if (part.bpm) flow.bpm = part.bpm;
+  if (flow.opts.lyricsOnly && !lyrics) return "";
+  const changes = flow.bpm && flow.bpm !== flow.shownBpm;
+  flow.shownBpm = flow.bpm;
   return `<div class="part" style="--c:${color}">
     <div class="part-top">
       <span class="part-name">${esc(part.name)}${part.detail ? ` <small>${esc(part.detail)}</small>` : ""}</span>
-      ${changes ? `<span class="bpm">${part.bpm} bpm</span>` : ""}
+      ${changes ? `<span class="bpm">${flow.bpm} bpm</span>` : ""}
       <span class="bars"><b>${part.bars}</b>${part.bars === 1 ? "compasso" : "compassos"}</span>
     </div>
-    ${lyricsHTML(lyrics, flow.sung)}
+    ${lyrics ? `<div class="lyrics">${lyrics}</div>` : ""}
   </div>`;
 }
 
@@ -90,8 +116,39 @@ function infoHTML(id) {
     `<div><dt>${esc(k)}</dt><dd>${value(k, v)}</dd></div>`).join("")}</dl>`;
 }
 
+/* ---------- Modos de leitura ---------- */
+
+// "Apenas letra" e "quem canta" valem pra todas as músicas e ficam guardados no aparelho.
+// Vocalista escolhido que não canta na música aberta não filtra nada nela.
+let opts = { lyricsOnly: false, singer: null };
+try { opts = { ...opts, ...JSON.parse(localStorage.getItem("cr-modes") || "{}") }; } catch (e) { /* sem storage, segue */ }
+const saveOpts = () => { try { localStorage.setItem("cr-modes", JSON.stringify(opts)); } catch (e) { /* idem */ } };
+
+function chipHTML(name, on) {
+  const i = singerInfo(name);
+  const face = i.photo
+    ? `<img src="${esc(i.photo)}" alt="${esc(name)}">`
+    : `<span${i.color ? ` style="color:${i.color}"` : ""}>${esc(name)}</span>`;
+  return `<button class="chip${i.photo ? " pic" : ""}" data-singer="${esc(name)}" aria-pressed="${on}" title="${esc(name)}">${face}</button>`;
+}
+
+function modesHTML(singers, pick) {
+  return `<div class="modes">
+    <button class="chip" data-mode="lyrics" aria-pressed="${opts.lyricsOnly}">Apenas letra</button>
+    ${singers.length > 1 ? `<span class="modes-who">
+      <button class="chip" data-singer="" aria-pressed="${!pick}">Todos</button>
+      ${singers.map(n => chipHTML(n, n === pick)).join("")}
+    </span>` : ""}
+  </div>`;
+}
+
+let current;
+
 function renderSong(song) {
-  const flow = { bpm: null, sung: hasSingers(song) };
+  current = song;
+  const singers = singersOf(song);
+  const pick = singers.includes(opts.singer) ? opts.singer : null;
+  const flow = { bpm: null, shownBpm: null, who: null, sung: singers.length > 0, opts: { lyricsOnly: opts.lyricsOnly, singer: pick } };
   const blocks = song.structure.map(block =>
     (block.repeat ? repeatHTML(song, block, flow) : partHTML(song, block, null, flow))).join("");
 
@@ -101,6 +158,7 @@ function renderSong(song) {
       <p class="artist">${esc(song.artist)}</p>
       ${infoHTML(song.id)}
     </section>
+    ${modesHTML(singers, pick)}
     <section class="structure">${blocks}</section>`;
   document.title = `${song.title} · Covenant Rites`;
 }
@@ -158,6 +216,15 @@ async function init() {
     if (!btn || String(getSelection())) return;
     show(btn.dataset.id);
     $("#setlist").scrollIntoView({ behavior: "smooth" });
+  });
+
+  $("#song").addEventListener("click", e => {
+    const btn = e.target.closest(".modes button");
+    if (!btn || !current) return;
+    if (btn.dataset.mode === "lyrics") opts.lyricsOnly = !opts.lyricsOnly;
+    else opts.singer = btn.dataset.singer || null;
+    saveOpts();
+    renderSong(current);
   });
 
   $("#setlist").addEventListener("click", e => {

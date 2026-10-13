@@ -170,6 +170,28 @@ main { max-width: 960px; margin: 0 auto; padding: 0 16px 64px; }
 .who-pics { display: flex; gap: 3px; align-self: start; padding-top: 1px; }
 .who-pics img { width: 32px; height: 32px; border-radius: 5px; object-fit: cover; display: block; }
 
+/* Modos de leitura: apenas letra, e quem canta */
+.modes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 12px; }
+.modes-who { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 6px 14px;
+  min-height: 38px;
+  cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.chip[aria-pressed="true"] span { color: var(--bg) !important; }
+.chip span { text-transform: uppercase; letter-spacing: .06em; font-size: 12px; font-weight: 800; }
+.chip.pic { padding: 3px; border-radius: 8px; opacity: .55; }
+.chip.pic[aria-pressed="true"] { opacity: 1; }
+.chip.pic img { display: block; width: 30px; height: 30px; border-radius: 5px; object-fit: cover; }
+
 /* Infos da música: formação, referência, tom */
 .info { margin: 0; display: grid; gap: 4px; font-size: 15px; }
 .info div { display: grid; grid-template-columns: 92px 1fr; column-gap: 8px; }

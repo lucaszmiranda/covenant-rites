@@ -17,6 +17,13 @@ Na letra, `[Nome] ` no começo de uma linha diz quem canta dali em diante (ex.: 
 
 A página sempre desenha a música como lista reta, na ordem em que ela acontece: um bloco que repete aparece inteiro a cada passada, sem colchete nem "×2". O selo de bpm só aparece onde o andamento muda em relação ao que vinha tocando. Circle of the Tyrants serve de modelo.
 
+## Modos de leitura
+
+Acima do mapa de cada música tem dois controles, que valem pra todas as músicas e ficam guardados no aparelho:
+
+- **Apenas letra**: esconde as partes sem letra.
+- **Quem canta** (só em música com mais de um vocalista): Todos, ou um vocalista. Escolhendo um, só sobram as linhas dele, incluindo as que ele canta junto (`[Felipe/Lucas]`). Com Apenas letra ligado junto, some também a parte em que ele não canta.
+
 ## Rodar local
 
 A página carrega os JSON via `fetch`, então precisa de servidor: `python -m http.server 8765` na raiz e abrir `http://localhost:8765`.
