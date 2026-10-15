@@ -29,12 +29,12 @@
       "name": "Riff 2",
       "detail": "só guitarra",
       "bars": 4,
-      "bpm": 144
+      "bpm": 145
     },
     {
       "name": "Verse (Riff 2)",
       "bars": 8,
-      "bpm": 144,
+      "bpm": 145,
       "lyrics": [
         "The remind of your life flashes by\nA life that soon won't be\nSmiling with axe in my hand\nEvil's rotten hand you'll see"
       ]
@@ -52,7 +52,7 @@
     {
       "name": "Verse (Riff 2)",
       "bars": 8,
-      "bpm": 144,
+      "bpm": 145,
       "lyrics": [
         "I'll send you to your maker\nI'll send you to your death\nDeath, nicely crucified\nDeath, heads on stakes"
       ]
@@ -83,14 +83,14 @@
       "name": "Riff 2",
       "detail": "só guitarra",
       "bars": 4,
-      "bpm": 144
+      "bpm": 145
     },
     {
       "name": "Riff 2",
       "color": "Riff 2 banda toda",
       "detail": "banda toda",
       "bars": 16,
-      "bpm": 144
+      "bpm": 145
     },
     {
       "name": "Chorus (Riff 3)",
