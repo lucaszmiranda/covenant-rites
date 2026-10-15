@@ -1,0 +1,106 @@
+{
+  "id": "the-return-of-darkness-and-evil",
+  "title": "The Return of Darkness and Evil",
+  "artist": "Bathory",
+  "colors": {
+    "Intro Pt. 1": "#66727c",
+    "Intro Pt. 2": "#1fa08f",
+    "Main Riff": "#8456e0",
+    "Verse": "#93ad35",
+    "Pre-Chorus": "#2f6fd6",
+    "Bridge": "#c2449a",
+    "Chorus": "#c8374b",
+    "Solo": "#2aa7c9"
+  },
+  "structure": [
+    {
+      "name": "Intro Pt. 1",
+      "detail": "só bateria",
+      "bars": 4,
+      "bpm": 142
+    },
+    {
+      "name": "Intro Pt. 2",
+      "detail": "bateria e guitarras",
+      "bars": 8
+    },
+    {
+      "name": "Main Riff",
+      "bars": 8
+    },
+    {
+      "name": "Verse",
+      "bars": 16,
+      "lyrics": [
+        "A sorcery written in blood\nWhispered by a witch in the dawn\nGive all the hell 'cause you've still got the strength\nTo start up the Black Metal storm",
+        "The darkness possessing, you thought that you could\nThe blood starts to freeze in your veins\nYour mindset is high and it's all to be real\nYou're feeling there's no longer strength"
+      ]
+    },
+    {
+      "name": "Pre-Chorus",
+      "bars": 12,
+      "lyrics": [
+        "I ride the flame\nYou take the pain\nI'll raise the dead\nBlack Metal night is here again",
+        "Fire and flame\nYou take the pain\nI'll raise the dead\nBlack Metal night is here again"
+      ]
+    },
+    {
+      "name": "Bridge",
+      "bars": 4
+    },
+    {
+      "name": "Chorus",
+      "bars": 16,
+      "lyrics": [
+        "It's the return of darkness and evil *(darkness and evil)*\nIt's the return of fire and flame\nIt's the return of my master Satan *(my master Satan)*\nIt's the return of soul-burning pain"
+      ]
+    },
+    {
+      "name": "Main Riff",
+      "bars": 8
+    },
+    {
+      "name": "Verse",
+      "bars": 16,
+      "lyrics": [
+        "Sacrifice a virgin to the flames of burning hell\nBlack witch of beauty, recite the words of spell\nGather masses, run in circles, scream for mercy, burning flame\nLiving hard, this is the master, let 'em feel the blood and pain",
+        "They're superior and angels of one\nHis angels of goodness have died\nThe demon's despising the virgin's cries\nTo the heavens of dust in the night"
+      ]
+    },
+    {
+      "name": "Pre-Chorus",
+      "bars": 12,
+      "lyrics": [
+        "I ride the flame\nYou take the pain\nI'll raise the dead\nBlack Metal night is here again",
+        "Fire and flame\nYou take the pain\nI'll raise the dead\nBlack Metal night is here again"
+      ]
+    },
+    {
+      "name": "Bridge",
+      "bars": 4
+    },
+    {
+      "name": "Chorus",
+      "bars": 16,
+      "lyrics": [
+        "*(It's the fucking return)*\nIt's the return of darkness and evil *(darkness and evil)*\nIt's the return of fire and flame\nIt's the return of my master Satan *(my master Satan)*\nIt's the return of soul-burning pain"
+      ]
+    },
+    {
+      "name": "Main Riff",
+      "bars": 8
+    },
+    {
+      "name": "Solo",
+      "bars": 9
+    },
+    {
+      "name": "Main Riff",
+      "bars": 16
+    },
+    {
+      "name": "Bridge",
+      "bars": 5
+    }
+  ]
+}

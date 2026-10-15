@@ -170,10 +170,11 @@ function renderSong(song) {
 
 /* ---------- Modo Tocar ---------- */
 
-// Só o mapa, na largura toda da tela; a parte que está tocando fica acesa, colada no topo,
-// e a página rola no tempo dos bpms. Parte mais alta que a tela vai subindo devagar enquanto dura.
+// Só o mapa, na largura toda e com letra grande; a parte que está tocando fica acesa.
+// A página rola contínua no tempo dos bpms: uma linha imaginária a 25% da altura da tela é o "agora",
+// e cada parte passa por ela no tempo que dura. No começo não rola até a música alcançar essa linha.
 // A banda não toca cravado no metrônomo: tocar numa parte faz a contagem seguir dali.
-const TOP = 8;
+const LINE = 0.25;
 let player = null;
 
 const elapsed = () => player.pos + (player.running ? (performance.now() - player.since) / 1000 : 0);
@@ -214,8 +215,8 @@ function tick() {
   // A rolagem corre atrás do alvo com suavidade, então a troca de parte não dá tranco.
   const now = performance.now();
   if (now - player.touched > 2500) {
-    const top = cur.el.getBoundingClientRect().top + scrollY - TOP;
-    const target = top + p * Math.max(0, cur.el.offsetHeight - innerHeight * 0.6);
+    const top = cur.el.getBoundingClientRect().top + scrollY;
+    const target = Math.max(0, top + p * cur.el.offsetHeight - innerHeight * LINE);
     const step = Math.min(1, (now - (player.last || now)) / 120);
     const y = Math.abs(target - scrollY) < 1 ? target : scrollY + (target - scrollY) * step;
     scrollTo(0, y);

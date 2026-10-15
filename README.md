@@ -23,7 +23,7 @@ Acima do mapa de cada música tem três controles. Apenas letra e Quem canta val
 
 - **Apenas letra**: esconde as partes sem letra.
 - **Quem canta** (só em música com mais de um vocalista): Todos, ou um vocalista. Escolhendo um, só sobram as linhas dele, incluindo as que ele canta junto (`[Felipe/Lucas]`). Com Apenas letra ligado junto, some também a parte em que ele não canta.
-- **Tocar**: some o resto da página e o mapa ocupa a largura toda. A parte da vez fica acesa, colada no topo da tela, e a página rola no tempo (compassos × 4 × 60 / bpm, tudo em 4/4); parte mais alta que a tela vai subindo devagar enquanto dura. Tocar numa parte faz a contagem seguir dali, pra ressincronizar com a banda. Com Apenas letra ligado, a próxima parte com letra fica esperando no topo enquanto as instrumentais passam. Sai pelo ✕ embaixo (não usa tela cheia do navegador, pra funcionar igual em tablet). A tela não apaga enquanto toca, onde o navegador deixa.
+- **Tocar**: some o resto da página, o mapa ocupa a largura toda e a letra fica grande. A parte da vez fica acesa e a página rola contínua no tempo (compassos × 4 × 60 / bpm, tudo em 4/4): uma linha imaginária a 25% da altura da tela é o "agora", e cada parte passa por ela no tempo que dura. Tocar numa parte faz a contagem seguir dali, pra ressincronizar com a banda. Com Apenas letra ligado, a próxima parte com letra fica esperando na linha enquanto as instrumentais passam. Sai pelo ✕ embaixo (não usa tela cheia do navegador, pra funcionar igual em tablet). A tela não apaga enquanto toca, onde o navegador deixa.
 
 ## Rodar local
 
