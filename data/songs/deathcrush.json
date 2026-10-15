@@ -15,11 +15,12 @@
     {
       "name": "Intro (Riff 1)",
       "bars": 4,
-      "bpm": 152
+      "bpm": 150
     },
     {
       "name": "Verse (Riff 1)",
       "bars": 8,
+      "bpm": 150,
       "lyrics": [
         "Demonic laughter at your cremation\nYour lungs gasp for air but are filled with blood\nA sudden crack as I crushed your skull"
       ]
@@ -27,11 +28,13 @@
     {
       "name": "Riff 2",
       "detail": "só guitarra",
-      "bars": 4
+      "bars": 4,
+      "bpm": 144
     },
     {
       "name": "Verse (Riff 2)",
       "bars": 8,
+      "bpm": 144,
       "lyrics": [
         "The remind of your life flashes by\nA life that soon won't be\nSmiling with axe in my hand\nEvil's rotten hand you'll see"
       ]
@@ -39,6 +42,7 @@
     {
       "name": "Chorus (Riff 3)",
       "bars": 16,
+      "bpm": 160,
       "lyrics": [
         "I come forward",
         "Deathcrush\nDeathcrush\nDeathcrush\nDeathcrush",
@@ -48,6 +52,7 @@
     {
       "name": "Verse (Riff 2)",
       "bars": 8,
+      "bpm": 144,
       "lyrics": [
         "I'll send you to your maker\nI'll send you to your death\nDeath, nicely crucified\nDeath, heads on stakes"
       ]
@@ -55,6 +60,7 @@
     {
       "name": "Chorus (Riff 3)",
       "bars": 16,
+      "bpm": 160,
       "lyrics": [
         "The barbeque has just begun",
         "Deathcrush\nDeathcrush\nDeathcrush\nDeathcrush",
@@ -64,27 +70,32 @@
     {
       "name": "Riff 1",
       "detail": "só baixo",
-      "bars": 4
+      "bars": 4,
+      "bpm": 150
     },
     {
       "name": "Riff 1",
       "color": "Intro (Riff 1)",
-      "bars": 8
+      "bars": 8,
+      "bpm": 150
     },
     {
       "name": "Riff 2",
       "detail": "só guitarra",
-      "bars": 4
+      "bars": 4,
+      "bpm": 144
     },
     {
       "name": "Riff 2",
       "color": "Riff 2 banda toda",
       "detail": "banda toda",
-      "bars": 16
+      "bars": 16,
+      "bpm": 144
     },
     {
       "name": "Chorus (Riff 3)",
       "bars": 16,
+      "bpm": 160,
       "lyrics": [
         "Crush\nCrush\nDeathcrush",
         "Deathcrush\nDeathcrush\nDeathcrush\nDeathcrush",
