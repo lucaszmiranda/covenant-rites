@@ -86,7 +86,9 @@
       "name": "Chorus (Riff 3)",
       "bars": 16,
       "lyrics": [
-        "Crush\nCrush\nDeathcrush\nDeathcrush\nDeathcrush"
+        "Crush\nCrush\nDeathcrush",
+        "Deathcrush\nDeathcrush\nDeathcrush\nDeathcrush",
+        "Deathcrush, Deathcrush, Deathcrush, Deathcrush"
       ]
     }
   ]
