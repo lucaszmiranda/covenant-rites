@@ -12,6 +12,7 @@
   "songs": [
     {
       "id": "deathcrush",
+      "ready": true,
       "artist": "Mayhem",
       "title": "Deathcrush",
       "before": [

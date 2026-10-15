@@ -1,0 +1,75 @@
+{
+  "id": "deathcrush",
+  "title": "Deathcrush",
+  "artist": "Mayhem",
+  "colors": {
+    "Intro (Riff 1)": "#66727c",
+    "Verse (Riff 1)": "#93ad35",
+    "Pausa": "#3a4650",
+    "Riff 2": "#8456e0",
+    "Verse (Riff 2)": "#1fa08f",
+    "Chorus (Riff 3)": "#c8374b",
+    "Riff 1": "#2f6fd6",
+    "Deathcrush (Riff 2)": "#c2449a"
+  },
+  "structure": [
+    {
+      "name": "Intro (Riff 1)",
+      "bars": 4,
+      "bpm": 152
+    },
+    {
+      "name": "Verse (Riff 1)",
+      "bars": 8
+    },
+    {
+      "name": "Pausa",
+      "bars": "1–2"
+    },
+    {
+      "name": "Riff 2",
+      "detail": "só guitarra",
+      "bars": 4
+    },
+    {
+      "name": "Verse (Riff 2)",
+      "bars": 8
+    },
+    {
+      "name": "Chorus (Riff 3)",
+      "bars": 16
+    },
+    {
+      "name": "Verse (Riff 2)",
+      "bars": 8
+    },
+    {
+      "name": "Chorus (Riff 3)",
+      "bars": 16
+    },
+    {
+      "name": "Riff 1",
+      "detail": "só baixo",
+      "bars": 4
+    },
+    {
+      "name": "Riff 1",
+      "color": "Intro (Riff 1)",
+      "bars": 8
+    },
+    {
+      "name": "Riff 2",
+      "detail": "só guitarra",
+      "bars": 4
+    },
+    {
+      "name": "Deathcrush (Riff 2)",
+      "detail": "banda toda",
+      "bars": 16
+    },
+    {
+      "name": "Chorus (Riff 3)",
+      "bars": 16
+    }
+  ]
+}
