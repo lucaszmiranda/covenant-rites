@@ -3,8 +3,8 @@
   "singers": {
     "Felipe": "#7fd1b9",
     "Lucas": "#c4b0ff",
-    "Luana": { "photo": "assets/singers/luana.jpg" },
-    "Willian": { "photo": "assets/singers/willian.jpg" }
+    "Luana": { "photo": "assets/singers/luana.jpg", "color": "#a8d672" },
+    "Willian": { "photo": "assets/singers/willian.jpg", "color": "#f0a3b5" }
   },
   "opening": [
     "Banda se prepara e desce do palco."

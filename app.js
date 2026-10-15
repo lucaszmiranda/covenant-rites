@@ -22,9 +22,12 @@ async function getSong(id) {
 // "[Nome] " no começo da linha diz quem canta dali em diante; "*trecho*" (backing) sai sublinhado.
 const SINGER = /^\[([^\]]+)\]\s*/;
 const splitLines = s => s.split(/ — |\n/);
+const BACKING = /\*[^*]+\*|\([^)]+\)/;
 const text = l => esc(l).replace(/\*([^*]+)\*/g, "<em>$1</em>");
 
 // Em "singers", cada nome tem uma cor ("#hex") ou { "photo", "color" }; com foto, o rosto entra no lugar do nome.
+// Foto só quando todo mundo que canta na música tem foto; senão a música inteira fica com nome colorido.
+let usePics = false;
 const singerInfo = n => {
   const v = (setlist.singers || {})[n];
   return typeof v === "string" ? { color: v } : v || {};
@@ -34,7 +37,7 @@ function singerHTML(who) {
   if (!who) return `<span class="who"></span>`;
   const names = who.split("/");
   const info = names.map(singerInfo);
-  if (info.every(i => i.photo)) {
+  if (usePics) {
     return `<span class="who who-pics">${info.map((i, k) => `<img src="${esc(i.photo)}" alt="${esc(names[k])}" title="${esc(names[k])}">`).join("")}</span>`;
   }
   const color = info[0].color;
@@ -50,12 +53,13 @@ function stanzaLines(s, flow) {
   });
 }
 
-// Com um vocalista escolhido, só ficam as linhas dele (inclusive as que ele canta junto, "[A/B]").
+// Com um vocalista escolhido, só ficam as linhas dele (inclusive as que ele canta junto, "[A/B]")
+// e as linhas com backing, "(trecho)" ou "*trecho*", que é sempre do outro vocalista.
 // Aí a foto/nome só aparece quando muda quem canta na estrofe (sem repetir a cada linha).
 function stanzaHTML(s, flow) {
   const pick = flow.opts.singer;
   let lines = stanzaLines(s, flow);
-  if (pick) lines = lines.filter(l => l.who && l.who.split("/").includes(pick));
+  if (pick) lines = lines.filter(l => l.who && (l.who.split("/").includes(pick) || BACKING.test(l.text)));
   if (!lines.length) return "";
   if (!flow.sung) return `<p>${lines.map(l => text(l.text)).join("<br>")}</p>`;
   return `<p class="sung">${lines.map((l, i) =>
@@ -129,10 +133,10 @@ const saveOpts = () => { try { localStorage.setItem("cr-modes", JSON.stringify(o
 
 function chipHTML(name, on) {
   const i = singerInfo(name);
-  const face = i.photo
+  const face = usePics
     ? `<img src="${esc(i.photo)}" alt="${esc(name)}">`
     : `<span${i.color ? ` style="color:${i.color}"` : ""}>${esc(name)}</span>`;
-  return `<button class="chip${i.photo ? " pic" : ""}" data-singer="${esc(name)}" aria-pressed="${on}" title="${esc(name)}">${face}</button>`;
+  return `<button class="chip${usePics ? " pic" : ""}" data-singer="${esc(name)}" aria-pressed="${on}" title="${esc(name)}">${face}</button>`;
 }
 
 function modesHTML(singers, pick) {
@@ -152,6 +156,7 @@ function renderSong(song) {
   stopPlay();
   current = song;
   const singers = singersOf(song);
+  usePics = singers.length > 0 && singers.every(n => singerInfo(n).photo);
   const pick = singers.includes(opts.singer) ? opts.singer : null;
   const flow = { bpm: null, shownBpm: null, who: null, sung: singers.length > 0, opts: { lyricsOnly: opts.lyricsOnly, singer: pick } };
   const blocks = song.structure.map(block =>
