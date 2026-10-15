@@ -80,14 +80,17 @@ const singersOf = song => [...new Set(song.structure
 // O selo de bpm só aparece onde o andamento muda de fato em relação ao que vinha tocando.
 // "Apenas letra" esconde a parte que fica sem letra (depois do filtro de vocalista).
 // O selo de bpm compara com a última parte que apareceu na tela.
+// Parte escondida continua na página (invisível) porque o modo Tocar conta o tempo dela.
+// Duração em segundos, tudo em 4/4: compassos × 4 tempos × 60 / bpm.
 function partHTML(song, part, pass, flow) {
   const color = song.colors[part.color || part.name] || "#999";
   const lyrics = lyricsHTML(pass == null ? part.lyrics : (part.lyrics || [])[pass], flow);
   if (part.bpm) flow.bpm = part.bpm;
-  if (flow.opts.lyricsOnly && !lyrics) return "";
-  const changes = flow.bpm && flow.bpm !== flow.shownBpm;
-  flow.shownBpm = flow.bpm;
-  return `<div class="part" style="--c:${color}">
+  const sec = (parseFloat(part.bars) || 0) * 240 / (flow.bpm || 120);
+  const off = flow.opts.lyricsOnly && !lyrics;
+  const changes = !off && flow.bpm && flow.bpm !== flow.shownBpm;
+  if (!off) flow.shownBpm = flow.bpm;
+  return `<div class="part${off ? " off" : ""}" data-sec="${sec}" style="--c:${color}">
     <div class="part-top">
       <span class="part-name">${esc(part.name)}${part.detail ? ` <small>${esc(part.detail)}</small>` : ""}</span>
       ${changes ? `<span class="bpm">${flow.bpm} bpm</span>` : ""}
@@ -134,6 +137,7 @@ function chipHTML(name, on) {
 
 function modesHTML(singers, pick) {
   return `<div class="modes">
+    <button class="chip play" data-mode="play">▶ Tocar</button>
     <button class="chip" data-mode="lyrics" aria-pressed="${opts.lyricsOnly}">Apenas letra</button>
     ${singers.length > 1 ? `<span class="modes-who">
       <button class="chip" data-singer="" aria-pressed="${!pick}">Todos</button>
@@ -145,6 +149,7 @@ function modesHTML(singers, pick) {
 let current;
 
 function renderSong(song) {
+  stopPlay();
   current = song;
   const singers = singersOf(song);
   const pick = singers.includes(opts.singer) ? opts.singer : null;
@@ -161,6 +166,106 @@ function renderSong(song) {
     ${modesHTML(singers, pick)}
     <section class="structure">${blocks}</section>`;
   document.title = `${song.title} · Covenant Rites`;
+}
+
+/* ---------- Modo Tocar ---------- */
+
+// Tela cheia, a parte que está tocando fica acesa e a página rola no tempo dos bpms.
+// A banda não toca cravado no metrônomo: tocar numa parte faz a contagem seguir dali.
+// A linha de leitura fica a 30% da altura da tela; cada parte passa por ela no tempo que dura.
+const LINE = 0.3;
+let player = null;
+
+const elapsed = () => player.pos + (player.running ? (performance.now() - player.since) / 1000 : 0);
+
+function timeline() {
+  let t = 0;
+  return [...document.querySelectorAll(".structure .part")].map(el => {
+    const start = t;
+    t += +el.dataset.sec || 0;
+    return { el, start, end: t };
+  });
+}
+
+function setPos(sec) {
+  player.pos = Math.max(0, sec);
+  player.since = performance.now();
+}
+
+function tick() {
+  if (!player) return;
+  const parts = player.parts;
+  const total = parts.length ? parts[parts.length - 1].end : 0;
+  if (player.running && elapsed() >= total) { setPos(total); player.running = false; playerBar(); }
+  const t = elapsed();
+  let i = parts.findIndex(p => t < p.end);
+  if (i < 0) i = parts.length - 1;
+  // Parte escondida ("Apenas letra"): a próxima parte visível fica esperando na linha.
+  let k = i;
+  while (k < parts.length && parts[k].el.classList.contains("off")) k++;
+  const cur = parts[k] || parts[i];
+  const p = k === i ? Math.min(1, (t - cur.start) / (cur.end - cur.start || 1)) : 0;
+  if (player.el !== cur.el) {
+    if (player.el) player.el.classList.remove("now");
+    cur.el.classList.add("now");
+    player.el = cur.el;
+  }
+  cur.el.style.setProperty("--p", p);
+  // Se a pessoa rolou a tela com o dedo, deixa ela olhar por uns segundos antes de voltar a seguir.
+  if (performance.now() - player.touched > 2500) {
+    const top = cur.el.getBoundingClientRect().top + scrollY;
+    scrollTo(0, top + p * cur.el.offsetHeight - innerHeight * LINE);
+  }
+  player.raf = requestAnimationFrame(tick);
+}
+
+function playerBar() {
+  let bar = $("#player");
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.id = "player";
+    bar.className = "player-bar";
+    document.body.append(bar);
+    bar.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn || !player) return;
+      if (btn.dataset.act === "exit") return stopPlay();
+      if (btn.dataset.act === "restart") { setPos(0); player.touched = 0; }
+      if (btn.dataset.act === "toggle") togglePlay();
+      playerBar();
+    });
+  }
+  bar.innerHTML = player ? `
+    <button data-act="restart" title="Voltar pro começo">⏮</button>
+    <button data-act="toggle" class="main">${player.running ? "❚❚ Pausar" : "▶ Continuar"}</button>
+    <button data-act="exit" title="Sair">✕</button>` : "";
+}
+
+function togglePlay() {
+  setPos(elapsed());
+  player.running = !player.running;
+  if (player.running && elapsed() >= player.parts[player.parts.length - 1].end) setPos(0);
+  playerBar();
+}
+
+async function startPlay() {
+  document.body.classList.add("playing");
+  player = { parts: timeline(), pos: 0, since: performance.now(), running: true, touched: 0, el: null };
+  playerBar();
+  tick();
+  try { if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); } catch (e) { /* iPhone não tem tela cheia de página; segue sem */ }
+  try { if (player) player.lock = await navigator.wakeLock.request("screen"); } catch (e) { /* sem wake lock, a tela pode apagar */ }
+}
+
+function stopPlay() {
+  if (!player) return;
+  cancelAnimationFrame(player.raf);
+  if (player.el) player.el.classList.remove("now");
+  if (player.lock) player.lock.release().catch(() => {});
+  player = null;
+  document.body.classList.remove("playing");
+  playerBar();
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
 }
 
 /* ---------- Ordem do show ---------- */
@@ -219,8 +324,16 @@ async function init() {
   });
 
   $("#song").addEventListener("click", e => {
+    // Tocando: tocar numa parte faz a contagem seguir a partir dela.
+    const part = player && e.target.closest(".part");
+    if (part) {
+      const p = player.parts.find(x => x.el === part);
+      if (p) { setPos(p.start); player.touched = 0; }
+      return;
+    }
     const btn = e.target.closest(".modes button");
     if (!btn || !current) return;
+    if (btn.dataset.mode === "play") return startPlay();
     if (btn.dataset.mode === "lyrics") opts.lyricsOnly = !opts.lyricsOnly;
     else opts.singer = btn.dataset.singer || null;
     saveOpts();
@@ -233,6 +346,15 @@ async function init() {
     show(btn.dataset.id);
     scrollTo({ top: 0 });
   });
+
+  for (const ev of ["wheel", "touchmove"]) addEventListener(ev, () => { if (player) player.touched = performance.now(); }, { passive: true });
+  addEventListener("keydown", e => {
+    if (!player) return;
+    if (e.key === " ") { e.preventDefault(); togglePlay(); }
+    if (e.key === "Escape") stopPlay();
+  });
+  // Saiu da tela cheia pelo sistema (Esc, gesto de voltar): sai do modo Tocar junto.
+  document.addEventListener("fullscreenchange", () => { if (player && !document.fullscreenElement) stopPlay(); });
 
   const wanted = location.hash.slice(1) || new URLSearchParams(location.search).get("song");
   const ready = setlist.songs.filter(s => s.ready);
