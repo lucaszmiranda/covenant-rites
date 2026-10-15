@@ -83,14 +83,14 @@
       "name": "Riff 2",
       "detail": "só guitarra",
       "bars": 4,
-      "bpm": 145
+      "bpm": 175
     },
     {
       "name": "Riff 2",
       "color": "Riff 2 banda toda",
       "detail": "banda toda",
       "bars": 16,
-      "bpm": 145
+      "bpm": 175
     },
     {
       "name": "Chorus (Riff 3)",
