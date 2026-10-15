@@ -194,25 +194,15 @@ main { max-width: 960px; margin: 0 auto; padding: 0 16px 64px; }
 
 .part.off { display: none; }
 
-/* Modo Tocar: só o mapa, a parte da vez acesa, barrinha de progresso embaixo dela */
+/* Modo Tocar: só o mapa, na largura toda, com a parte da vez acesa */
 body.playing .topbar,
 body.playing .show,
 body.playing .setlist,
 body.playing .head,
 body.playing .modes { display: none; }
-body.playing main { padding-top: 30vh; padding-bottom: 75vh; }
-body.playing .part { position: relative; overflow: hidden; opacity: .5; cursor: pointer; }
+body.playing main { max-width: none; padding: 8px 12px 100vh; }
+body.playing .part { opacity: .5; cursor: pointer; }
 body.playing .part.now { opacity: 1; }
-body.playing .part.now::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 4px;
-  width: calc(var(--p, 0) * 100%);
-  background: var(--ink);
-  opacity: .75;
-}
 .player-bar { display: none; }
 body.playing .player-bar {
   display: flex;

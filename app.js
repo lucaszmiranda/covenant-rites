@@ -170,10 +170,10 @@ function renderSong(song) {
 
 /* ---------- Modo Tocar ---------- */
 
-// Tela cheia, a parte que está tocando fica acesa e a página rola no tempo dos bpms.
+// Só o mapa, na largura toda da tela; a parte que está tocando fica acesa, colada no topo,
+// e a página rola no tempo dos bpms. Parte mais alta que a tela vai subindo devagar enquanto dura.
 // A banda não toca cravado no metrônomo: tocar numa parte faz a contagem seguir dali.
-// A linha de leitura fica a 30% da altura da tela; cada parte passa por ela no tempo que dura.
-const LINE = 0.3;
+const TOP = 8;
 let player = null;
 
 const elapsed = () => player.pos + (player.running ? (performance.now() - player.since) / 1000 : 0);
@@ -210,12 +210,17 @@ function tick() {
     cur.el.classList.add("now");
     player.el = cur.el;
   }
-  cur.el.style.setProperty("--p", p);
   // Se a pessoa rolou a tela com o dedo, deixa ela olhar por uns segundos antes de voltar a seguir.
-  if (performance.now() - player.touched > 2500) {
-    const top = cur.el.getBoundingClientRect().top + scrollY;
-    scrollTo(0, top + p * cur.el.offsetHeight - innerHeight * LINE);
+  // A rolagem corre atrás do alvo com suavidade, então a troca de parte não dá tranco.
+  const now = performance.now();
+  if (now - player.touched > 2500) {
+    const top = cur.el.getBoundingClientRect().top + scrollY - TOP;
+    const target = top + p * Math.max(0, cur.el.offsetHeight - innerHeight * 0.6);
+    const step = Math.min(1, (now - (player.last || now)) / 120);
+    const y = Math.abs(target - scrollY) < 1 ? target : scrollY + (target - scrollY) * step;
+    scrollTo(0, y);
   }
+  player.last = now;
   player.raf = requestAnimationFrame(tick);
 }
 
@@ -253,7 +258,6 @@ async function startPlay() {
   player = { parts: timeline(), pos: 0, since: performance.now(), running: true, touched: 0, el: null };
   playerBar();
   tick();
-  try { if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); } catch (e) { /* iPhone não tem tela cheia de página; segue sem */ }
   try { if (player) player.lock = await navigator.wakeLock.request("screen"); } catch (e) { /* sem wake lock, a tela pode apagar */ }
 }
 
@@ -265,7 +269,6 @@ function stopPlay() {
   player = null;
   document.body.classList.remove("playing");
   playerBar();
-  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
 }
 
 /* ---------- Ordem do show ---------- */
@@ -353,8 +356,6 @@ async function init() {
     if (e.key === " ") { e.preventDefault(); togglePlay(); }
     if (e.key === "Escape") stopPlay();
   });
-  // Saiu da tela cheia pelo sistema (Esc, gesto de voltar): sai do modo Tocar junto.
-  document.addEventListener("fullscreenchange", () => { if (player && !document.fullscreenElement) stopPlay(); });
 
   const wanted = location.hash.slice(1) || new URLSearchParams(location.search).get("song");
   const ready = setlist.songs.filter(s => s.ready);
