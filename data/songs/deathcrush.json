@@ -49,13 +49,14 @@
       "name": "Verse (Riff 2)",
       "bars": 8,
       "lyrics": [
-        "I'll send you to your maker\nI'll send you to your death\nDeath, nicely crucified\nDeath, heads on stakes\nThe barbeque has just begun"
+        "I'll send you to your maker\nI'll send you to your death\nDeath, nicely crucified\nDeath, heads on stakes"
       ]
     },
     {
       "name": "Chorus (Riff 3)",
       "bars": 16,
       "lyrics": [
+        "The barbeque has just begun",
         "Deathcrush\nDeathcrush\nDeathcrush"
       ]
     },
