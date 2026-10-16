@@ -180,9 +180,11 @@ function renderSong(song) {
 // e cada parte passa por ela no tempo que dura. No começo não rola até a música alcançar essa linha.
 // A banda não toca cravado no metrônomo: tocar numa parte (ou nos botões ◀ ▶) faz a contagem seguir dali,
 // e dá pra escolher a velocidade entre 90% e 110% pra acompanhar a banda.
-// Ao começar (e ao voltar pro começo) conta um compasso de 4 tempos no bpm da primeira parte, já na velocidade escolhida.
+// Ao começar (e ao voltar pro começo) conta dois compassos de 4 tempos (1 2 3 4, 1 2 3 4) no bpm da primeira parte,
+// já na velocidade escolhida.
 const LINE = 0.25;
 const RATES = [90, 95, 100, 105, 110];
+const COUNT_BEATS = 8;
 let player = null;
 
 const elapsed = () => player.pos + (player.running ? (performance.now() - player.since) / 1000 * player.rate : 0);
@@ -205,7 +207,9 @@ function countIn() {
   const bpm = +(player.parts[0] || { el: { dataset: {} } }).el.dataset.bpm || 120;
   player.running = false;
   player.beat = 60000 / (bpm * player.rate);
-  player.wait = performance.now() + 4 * player.beat;
+  player.wait = performance.now() + COUNT_BEATS * player.beat;
+  const count = $("#count");
+  if (count) delete count.dataset.left;
 }
 
 function tick() {
@@ -214,9 +218,10 @@ function tick() {
   if (player.wait) {
     const left = Math.ceil((player.wait - performance.now()) / player.beat);
     if (left <= 0) { player.wait = null; setPos(player.pos); player.running = true; playerBar(); }
-    const n = left > 0 ? String(5 - left) : "";
+    const n = left > 0 ? String((COUNT_BEATS - left) % 4 + 1) : "";
     const count = $("#count");
-    if (count.textContent !== n) {
+    if (count.dataset.left !== String(left)) {
+      count.dataset.left = left;
       count.textContent = n;
       count.classList.remove("hit");
       void count.offsetWidth;
