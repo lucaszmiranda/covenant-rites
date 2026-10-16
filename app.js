@@ -94,7 +94,7 @@ function partHTML(song, part, pass, flow) {
   const off = flow.opts.lyricsOnly && !lyrics;
   const changes = !off && flow.bpm && flow.bpm !== flow.shownBpm;
   if (!off) flow.shownBpm = flow.bpm;
-  return `<div class="part${off ? " off" : ""}" data-sec="${sec}" style="--c:${color}">
+  return `<div class="part${off ? " off" : ""}" data-sec="${sec}" data-bpm="${flow.bpm || 120}" style="--c:${color}">
     <div class="part-top">
       <span class="part-name">${esc(part.name)}${part.detail ? ` <small>${esc(part.detail)}</small>` : ""}</span>
       ${changes ? `<span class="bpm">${flow.bpm} bpm</span>` : ""}
@@ -180,9 +180,8 @@ function renderSong(song) {
 // e cada parte passa por ela no tempo que dura. No começo não rola até a música alcançar essa linha.
 // A banda não toca cravado no metrônomo: tocar numa parte (ou nos botões ◀ ▶) faz a contagem seguir dali,
 // e dá pra escolher a velocidade entre 90% e 110% pra acompanhar a banda.
-// Ao começar (e ao voltar pro começo) tem uma contagem de 4 segundos antes de rolar.
+// Ao começar (e ao voltar pro começo) conta um compasso de 4 tempos no bpm da primeira parte, já na velocidade escolhida.
 const LINE = 0.25;
-const COUNT = 4;
 const RATES = [90, 95, 100, 105, 110];
 let player = null;
 
@@ -203,17 +202,26 @@ function setPos(sec) {
 }
 
 function countIn() {
+  const bpm = +(player.parts[0] || { el: { dataset: {} } }).el.dataset.bpm || 120;
   player.running = false;
-  player.wait = performance.now() + COUNT * 1000;
+  player.beat = 60000 / (bpm * player.rate);
+  player.wait = performance.now() + 4 * player.beat;
 }
 
 function tick() {
   if (!player) return;
   const parts = player.parts;
   if (player.wait) {
-    const left = Math.ceil((player.wait - performance.now()) / 1000);
+    const left = Math.ceil((player.wait - performance.now()) / player.beat);
     if (left <= 0) { player.wait = null; setPos(player.pos); player.running = true; playerBar(); }
-    $("#count").textContent = left > 0 ? left : "";
+    const n = left > 0 ? String(5 - left) : "";
+    const count = $("#count");
+    if (count.textContent !== n) {
+      count.textContent = n;
+      count.classList.remove("hit");
+      void count.offsetWidth;
+      count.classList.add("hit");
+    }
   }
   const total = parts.length ? parts[parts.length - 1].end : 0;
   if (player.running && elapsed() >= total) { setPos(total); player.running = false; playerBar(); }
