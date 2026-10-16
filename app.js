@@ -179,10 +179,11 @@ function renderSong(song) {
 // A página rola contínua no tempo dos bpms: uma linha imaginária a 25% da altura da tela é o "agora",
 // e cada parte passa por ela no tempo que dura. No começo não rola até a música alcançar essa linha.
 // A banda não toca cravado no metrônomo: tocar numa parte (ou nos botões ◀ ▶) faz a contagem seguir dali,
-// e a velocidade ajusta de 5 em 5% pra acompanhar a banda.
+// e dá pra escolher a velocidade entre 90% e 110% pra acompanhar a banda.
 // Ao começar (e ao voltar pro começo) tem uma contagem de 4 segundos antes de rolar.
 const LINE = 0.25;
 const COUNT = 4;
+const RATES = [90, 95, 100, 105, 110];
 let player = null;
 
 const elapsed = () => player.pos + (player.running ? (performance.now() - player.since) / 1000 * player.rate : 0);
@@ -259,7 +260,7 @@ function playerBar() {
       if (act === "prev") jump(-1);
       if (act === "next") jump(1);
       if (act === "toggle") togglePlay();
-      if (btn.dataset.rate) setRate(+btn.dataset.rate);
+      if (btn.dataset.rate) { setPos(elapsed()); player.rate = btn.dataset.rate / 100; }
       playerBar();
     });
     const count = document.createElement("div");
@@ -271,11 +272,7 @@ function playerBar() {
   const pct = Math.round(player.rate * 100);
   bar.innerHTML = `
     <div class="row speed">
-      <button data-rate="-10">−10%</button>
-      <button data-rate="-5">−5%</button>
-      <button data-rate="0" class="rate${pct === 100 ? "" : " changed"}" title="Voltar pra 100%">${pct}%</button>
-      <button data-rate="5">+5%</button>
-      <button data-rate="10">+10%</button>
+      ${RATES.map(r => `<button data-rate="${r}"${r === pct ? ' class="on"' : ""}>${r}%</button>`).join("")}
     </div>
     <div class="row">
       <button data-act="restart" title="Voltar pro começo">⏮</button>
@@ -300,13 +297,6 @@ function jump(dir) {
   const i = parts.findIndex(p => p.el === player.el);
   const to = parts[Math.max(0, Math.min(parts.length - 1, i + dir))];
   if (to) { setPos(to.start); player.touched = 0; }
-}
-
-// 0 volta pra 100%; o resto soma ou tira pontos percentuais, entre 50% e 150%.
-function setRate(d) {
-  setPos(elapsed());
-  const pct = d ? Math.round(player.rate * 100) + d : 100;
-  player.rate = Math.max(50, Math.min(150, pct)) / 100;
 }
 
 async function startPlay() {
