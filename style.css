@@ -201,7 +201,7 @@ body.playing .setlist,
 body.playing .head,
 body.playing .modes { display: none; }
 body.playing main { max-width: none; padding: 8px 12px 100vh; }
-body.playing .part { opacity: .5; cursor: pointer; padding: 12px 18px; }
+body.playing .part { opacity: .5; cursor: pointer; padding: 12px 18px; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
 body.playing .part-name,
 body.playing .bars b { font-size: clamp(24px, 3vw, 38px); }
 body.playing .bars { font-size: clamp(15px, 1.6vw, 22px); }
@@ -215,6 +215,8 @@ body.playing .part.now { opacity: 1; }
 .player-bar { display: none; }
 body.playing .player-bar {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
   position: fixed;
   z-index: 10;
@@ -232,11 +234,30 @@ body.playing .player-bar {
   border-radius: 99px;
   min-width: 48px;
   min-height: 48px;
-  padding: 0 16px;
+  padding: 0 14px;
+  -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(0, 0, 0, .5);
 }
-.player-bar .main { background: var(--accent); color: var(--bg); border-color: var(--accent); min-width: 140px; }
+.player-bar .row { display: flex; gap: 6px; }
+.player-bar .main { background: var(--accent); color: var(--bg); border-color: var(--accent); min-width: 128px; }
+.player-bar .speed button { min-height: 36px; min-width: 0; padding: 0 12px; font-size: 14px; font-weight: 700; color: var(--muted); }
+.player-bar .speed .rate { color: var(--ink); min-width: 64px; }
+.player-bar .speed .rate.changed { color: var(--accent); border-color: var(--accent); }
+.count {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background: rgba(8, 12, 14, .6);
+  font-size: clamp(120px, 30vw, 280px);
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: 0 0 40px rgba(127, 209, 185, .45);
+}
+.count:empty { display: none; }
 .chip.play { color: var(--accent); border-color: var(--accent); }
 
 /* Infos da música: formação, referência, tom */

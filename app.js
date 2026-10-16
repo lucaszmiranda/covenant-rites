@@ -178,11 +178,14 @@ function renderSong(song) {
 // Só o mapa, na largura toda e com letra grande; a parte que está tocando fica acesa.
 // A página rola contínua no tempo dos bpms: uma linha imaginária a 25% da altura da tela é o "agora",
 // e cada parte passa por ela no tempo que dura. No começo não rola até a música alcançar essa linha.
-// A banda não toca cravado no metrônomo: tocar numa parte faz a contagem seguir dali.
+// A banda não toca cravado no metrônomo: tocar numa parte (ou nos botões ◀ ▶) faz a contagem seguir dali,
+// e a velocidade ajusta de 5 em 5% pra acompanhar a banda.
+// Ao começar (e ao voltar pro começo) tem uma contagem de 4 segundos antes de rolar.
 const LINE = 0.25;
+const COUNT = 4;
 let player = null;
 
-const elapsed = () => player.pos + (player.running ? (performance.now() - player.since) / 1000 : 0);
+const elapsed = () => player.pos + (player.running ? (performance.now() - player.since) / 1000 * player.rate : 0);
 
 function timeline() {
   let t = 0;
@@ -198,9 +201,19 @@ function setPos(sec) {
   player.since = performance.now();
 }
 
+function countIn() {
+  player.running = false;
+  player.wait = performance.now() + COUNT * 1000;
+}
+
 function tick() {
   if (!player) return;
   const parts = player.parts;
+  if (player.wait) {
+    const left = Math.ceil((player.wait - performance.now()) / 1000);
+    if (left <= 0) { player.wait = null; setPos(player.pos); player.running = true; playerBar(); }
+    $("#count").textContent = left > 0 ? left : "";
+  }
   const total = parts.length ? parts[parts.length - 1].end : 0;
   if (player.running && elapsed() >= total) { setPos(total); player.running = false; playerBar(); }
   const t = elapsed();
@@ -240,28 +253,66 @@ function playerBar() {
     bar.addEventListener("click", e => {
       const btn = e.target.closest("button");
       if (!btn || !player) return;
-      if (btn.dataset.act === "exit") return stopPlay();
-      if (btn.dataset.act === "restart") { setPos(0); player.touched = 0; }
-      if (btn.dataset.act === "toggle") togglePlay();
+      const act = btn.dataset.act;
+      if (act === "exit") return stopPlay();
+      if (act === "restart") { setPos(0); player.touched = 0; countIn(); }
+      if (act === "prev") jump(-1);
+      if (act === "next") jump(1);
+      if (act === "toggle") togglePlay();
+      if (btn.dataset.rate) setRate(+btn.dataset.rate);
       playerBar();
     });
+    const count = document.createElement("div");
+    count.id = "count";
+    count.className = "count";
+    document.body.append(count);
   }
-  bar.innerHTML = player ? `
-    <button data-act="restart" title="Voltar pro começo">⏮</button>
-    <button data-act="toggle" class="main">${player.running ? "❚❚ Pausar" : "▶ Continuar"}</button>
-    <button data-act="exit" title="Sair">✕</button>` : "";
+  if (!player) { bar.innerHTML = ""; $("#count").textContent = ""; return; }
+  const pct = Math.round(player.rate * 100);
+  bar.innerHTML = `
+    <div class="row speed">
+      <button data-rate="-10">−10%</button>
+      <button data-rate="-5">−5%</button>
+      <button data-rate="0" class="rate${pct === 100 ? "" : " changed"}" title="Voltar pra 100%">${pct}%</button>
+      <button data-rate="5">+5%</button>
+      <button data-rate="10">+10%</button>
+    </div>
+    <div class="row">
+      <button data-act="restart" title="Voltar pro começo">⏮</button>
+      <button data-act="prev" title="Parte anterior">◀</button>
+      <button data-act="toggle" class="main">${player.running || player.wait ? "❚❚ Pausar" : "▶ Continuar"}</button>
+      <button data-act="next" title="Próxima parte">▶</button>
+      <button data-act="exit" title="Sair">✕</button>
+    </div>`;
 }
 
 function togglePlay() {
+  if (player.wait) { player.wait = null; $("#count").textContent = ""; playerBar(); return; }
   setPos(elapsed());
   player.running = !player.running;
   if (player.running && elapsed() >= player.parts[player.parts.length - 1].end) setPos(0);
   playerBar();
 }
 
+// ◀ ▶ vão pro começo da parte visível anterior ou seguinte.
+function jump(dir) {
+  const parts = player.parts.filter(p => !p.el.classList.contains("off"));
+  const i = parts.findIndex(p => p.el === player.el);
+  const to = parts[Math.max(0, Math.min(parts.length - 1, i + dir))];
+  if (to) { setPos(to.start); player.touched = 0; }
+}
+
+// 0 volta pra 100%; o resto soma ou tira pontos percentuais, entre 50% e 150%.
+function setRate(d) {
+  setPos(elapsed());
+  const pct = d ? Math.round(player.rate * 100) + d : 100;
+  player.rate = Math.max(50, Math.min(150, pct)) / 100;
+}
+
 async function startPlay() {
   document.body.classList.add("playing");
-  player = { parts: timeline(), pos: 0, since: performance.now(), running: true, touched: 0, el: null };
+  player = { parts: timeline(), pos: 0, since: performance.now(), running: false, rate: 1, touched: 0, el: null };
+  countIn();
   playerBar();
   tick();
   try { if (player) player.lock = await navigator.wakeLock.request("screen"); } catch (e) { /* sem wake lock, a tela pode apagar */ }
@@ -336,6 +387,7 @@ async function init() {
     // Tocando: tocar numa parte faz a contagem seguir a partir dela.
     const part = player && e.target.closest(".part");
     if (part) {
+      getSelection().removeAllRanges();
       const p = player.parts.find(x => x.el === part);
       if (p) { setPos(p.start); player.touched = 0; }
       return;
@@ -361,6 +413,8 @@ async function init() {
     if (!player) return;
     if (e.key === " ") { e.preventDefault(); togglePlay(); }
     if (e.key === "Escape") stopPlay();
+    if (e.key === "ArrowLeft") jump(-1);
+    if (e.key === "ArrowRight") jump(1);
   });
 
   const wanted = location.hash.slice(1) || new URLSearchParams(location.search).get("song");
