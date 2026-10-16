@@ -181,7 +181,7 @@ function renderSong(song) {
 // A banda não toca cravado no metrônomo: tocar numa parte (ou nos botões ◀ ▶) faz a contagem seguir dali,
 // e dá pra escolher a velocidade entre 90% e 110% pra acompanhar a banda.
 // Ao começar (e ao voltar pro começo) conta dois compassos de 4 tempos (1 2 3 4, 1 2 3 4) no bpm da primeira parte,
-// já na velocidade escolhida.
+// já na velocidade escolhida. "Pular contagem" começa na hora.
 const LINE = 0.25;
 const RATES = [90, 95, 100, 105, 110];
 const COUNT_BEATS = 8;
@@ -212,20 +212,35 @@ function countIn() {
   if (count) delete count.dataset.left;
 }
 
+// Termina a contagem (no fim dela ou no "Pular") e começa a rolar.
+function go() {
+  player.wait = null;
+  setPos(player.pos);
+  player.running = true;
+  showCount("");
+  playerBar();
+}
+
+function showCount(n) {
+  const count = $("#count");
+  count.classList.toggle("on", !!n);
+  const num = count.querySelector(".n");
+  num.textContent = n;
+  num.classList.remove("hit");
+  void num.offsetWidth;
+  num.classList.add("hit");
+}
+
 function tick() {
   if (!player) return;
   const parts = player.parts;
   if (player.wait) {
     const left = Math.ceil((player.wait - performance.now()) / player.beat);
-    if (left <= 0) { player.wait = null; setPos(player.pos); player.running = true; playerBar(); }
-    const n = left > 0 ? String((COUNT_BEATS - left) % 4 + 1) : "";
     const count = $("#count");
-    if (count.dataset.left !== String(left)) {
+    if (left <= 0) go();
+    else if (count.dataset.left !== String(left)) {
       count.dataset.left = left;
-      count.textContent = n;
-      count.classList.remove("hit");
-      void count.offsetWidth;
-      count.classList.add("hit");
+      showCount(String((COUNT_BEATS - left) % 4 + 1));
     }
   }
   const total = parts.length ? parts[parts.length - 1].end : 0;
@@ -279,9 +294,11 @@ function playerBar() {
     const count = document.createElement("div");
     count.id = "count";
     count.className = "count";
+    count.innerHTML = `<span class="n"></span><button class="skip">Pular contagem ⏭</button>`;
+    count.addEventListener("click", e => { if (player && player.wait && e.target.closest(".skip")) go(); });
     document.body.append(count);
   }
-  if (!player) { bar.innerHTML = ""; $("#count").textContent = ""; return; }
+  if (!player) { bar.innerHTML = ""; showCount(""); return; }
   const pct = Math.round(player.rate * 100);
   bar.innerHTML = `
     <div class="row speed">
@@ -297,7 +314,7 @@ function playerBar() {
 }
 
 function togglePlay() {
-  if (player.wait) { player.wait = null; $("#count").textContent = ""; playerBar(); return; }
+  if (player.wait) { player.wait = null; showCount(""); playerBar(); return; }
   setPos(elapsed());
   player.running = !player.running;
   if (player.running && elapsed() >= player.parts[player.parts.length - 1].end) setPos(0);

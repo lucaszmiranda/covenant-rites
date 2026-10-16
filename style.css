@@ -247,17 +247,37 @@ body.playing .player-bar {
   position: fixed;
   inset: 0;
   z-index: 9;
-  display: grid;
-  place-items: center;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
   pointer-events: none;
   background: rgba(8, 12, 14, .6);
+}
+.count.on { display: flex; }
+.count .n {
   font-size: clamp(120px, 30vw, 280px);
   font-weight: 800;
+  line-height: 1;
   color: var(--accent);
   text-shadow: 0 0 40px rgba(127, 209, 185, .45);
 }
-.count:empty { display: none; }
-.count.hit { animation: hit .25s ease-out; }
+.count .n.hit { animation: hit .25s ease-out; }
+.count .skip {
+  pointer-events: auto;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: 99px;
+  min-height: 52px;
+  padding: 0 24px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
 @keyframes hit { from { transform: scale(1.3); } to { transform: scale(1); } }
 .chip.play { color: var(--accent); border-color: var(--accent); }
 
